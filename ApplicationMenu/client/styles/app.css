@@ -1,0 +1,99 @@
+/*Import and styles for global thing
+*/
+
+@import "breadcrumb.css";
+@import "portes.css";
+@import "portes_config.css";
+@import "avatar&oob.css";
+@import "avatar_medecin.css";
+@import "chrono.css";
+
+.row-centered {
+    text-align:center;
+}
+.btn_config {
+    border-radius: 10px;
+	background-color: beige;	
+	border-color: grey;
+	border-width: 1px;
+}
+.exit_row{
+    float:right;
+	margin-top: 20px;
+}
+.bandeau{
+	background-color: #ededef;
+	margin-bottom: 20px;
+}
+.all-breadcrumb{
+	margin: 10px;
+}
+.btn-icon.right{
+	float: right;
+}
+.btn-icon.left{
+	float: left;
+}
+.btn-icon.validate{
+	color:green;
+}
+
+/*css when the screen's width is over 767px*/
+@media (min-width: 767px) {
+	h1{
+	color :#73738c;
+	font-size: 50px;
+	font-family: serif;
+	text-align:center;
+	}
+	input.btn_home{
+		display:inline-block;
+		height: 20vw;
+	    float:none;
+	    text-align:center;
+	    font-size: 1.6vw;
+	    word-wrap: break-word;
+	    margin-top: 50px;
+	    margin-bottom: 40px;
+	    padding-left: 2px;
+	    padding-right: 2px;
+	}
+	.btn-icon{
+		word-wrap: break-word;
+		font-size: 1.2vw;
+		color:grey;
+		border-width: 1px;
+		border-color: grey;
+		margin: 40px;
+	}
+}
+
+/*css when the screen's width is under 767px*/
+@media (max-width: 767px) {
+	h1{
+	color :#73738c;
+	font-size: 8vw;
+	font-family: serif;
+	text-align:center;
+	}
+	input.btn_home{
+		display:inline-block;
+		height: 25vw;
+	    float:none;
+	    text-align:center;
+	    font-size: 2.8vw;
+	    word-wrap: break-word;
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    padding-left: 8px;
+	    padding-right: 2px;
+	}
+	.btn-icon {
+		word-wrap: break-word;
+		font-size: 3.5vw;
+		color:grey;
+		border-width: 1px;
+		border-color: grey;
+		margin: 20px;
+	}
+}

@@ -1,0 +1,30 @@
+/*Style for avatar and Oob part*/
+
+.btn-radiocheckbox{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+input[type=radio]{
+	transform: scale(1.5);
+}
+input[type=checkbox]{
+	transform: scale(1.5);
+}
+@media (min-width: 767px) {
+	.instructions{
+		text-align: center;
+		font-size: 20px;
+		font-style: italic;	
+		margin: 20px;
+	    word-wrap: break-word;
+	}
+}
+@media (max-width: 767px) {
+	.instructions{
+		text-align: center;
+		font-size: 12px;
+		font-style: italic;	
+		margin: 10px;
+	    word-wrap: break-word;
+	}
+}

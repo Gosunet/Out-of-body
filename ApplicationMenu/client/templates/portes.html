@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<!-- choose which the configuration you want for the doors' exercice
+ -->
+<section  ng-controller="PortesCtrl">
+
+	<div class="row-centered">
+		<input type="button" ng-click='suivant_click("entiere")' value="Portes entières" 
+			class="btn btn_config col-sm-3 col-sm-offset-0 col-xs-10 btn_portes"/>
+
+		<input type="button" ng-click='suivant_click("demi_haut")' value="Etagères" 
+			class="btn btn_config col-sm-3 col-sm-offset-1 col-xs-10 btn_portes"/>
+
+		<input type="button" ng-click='suivant_click("demi_bas")' value="Portiques" 
+			class="btn btn_config col-sm-3 col-sm-offset-1 col-xs-10 btn_portes"/>
+	</div>
+	<div class="row">
+		<a ng-click="previous()" class="btn btn_config btn-icon col-sm-1 col-sm-offset-0 col-xs-3 col-xs-offset-1 previous_row">
+			<i class="fa fa-chevron-left fa-lg"></i> Retour
+		</a>
+	</div>
+</section>

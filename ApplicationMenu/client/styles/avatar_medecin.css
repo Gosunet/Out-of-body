@@ -1,0 +1,24 @@
+/*Style for avatar_medecin part*/
+
+.warning-msg{
+	color: red;
+	text-align: right;
+	margin: 10px;
+    word-wrap: break-word;
+}
+
+@media (min-width: 767px) {
+	.number-input{
+		text-align: center;
+		font-size: 20px;
+		width: 20vw;
+	}
+}
+@media (max-width: 767px) {
+	.number-input{
+		text-align: center;
+		font-size: 12px;
+		width: 15vw;
+		margin-top: 5px;
+	}
+}

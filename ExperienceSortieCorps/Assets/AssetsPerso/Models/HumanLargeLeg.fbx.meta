@@ -1,0 +1,997 @@
+fileFormatVersion: 2
+guid: 58d66f43b4ba8a5488ffc8b363a0e1d6
+timeCreated: 1428503785
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: EyeLeft
+    100002: EyeRight
+    100004: fhair01Mesh
+    100006: Head
+    100008: high-polyMesh
+    100010: Hips
+    100012: //RootNode
+    100014: jeans01Mesh
+    100016: LeftArm
+    100018: LeftFoot
+    100020: LeftForeArm
+    100022: LeftHand
+    100024: LeftHandIndex1
+    100026: LeftHandIndex2
+    100028: LeftHandIndex3
+    100030: LeftHandMiddle1
+    100032: LeftHandMiddle2
+    100034: LeftHandMiddle3
+    100036: LeftHandPinky1
+    100038: LeftHandPinky2
+    100040: LeftHandPinky3
+    100042: LeftHandRing1
+    100044: LeftHandRing2
+    100046: LeftHandRing3
+    100048: LeftHandThumb1
+    100050: LeftHandThumb2
+    100052: LeftHandThumb3
+    100054: LeftInHandIndex
+    100056: LeftInHandMiddle
+    100058: LeftInHandPinky
+    100060: LeftInHandRing
+    100062: LeftLeg
+    100064: LeftShoulder
+    100066: LeftShoulderExtra
+    100068: LeftToeBase
+    100070: LeftUpLeg
+    100072: Neck
+    100074: python
+    100076: pythonMesh
+    100078: RightArm
+    100080: RightFoot
+    100082: RightForeArm
+    100084: RightHand
+    100086: RightHandIndex1
+    100088: RightHandIndex2
+    100090: RightHandIndex3
+    100092: RightHandMiddle1
+    100094: RightHandMiddle2
+    100096: RightHandMiddle3
+    100098: RightHandPinky1
+    100100: RightHandPinky2
+    100102: RightHandPinky3
+    100104: RightHandRing1
+    100106: RightHandRing2
+    100108: RightHandRing3
+    100110: RightHandThumb1
+    100112: RightHandThumb2
+    100114: RightHandThumb3
+    100116: RightInHandIndex
+    100118: RightInHandMiddle
+    100120: RightInHandPinky
+    100122: RightInHandRing
+    100124: RightLeg
+    100126: RightShoulder
+    100128: RightShoulderExtra
+    100130: RightToeBase
+    100132: RightUpLeg
+    100134: shirt01Mesh
+    100136: shoes01_hresMesh
+    100138: Spine
+    100140: Spine1
+    100142: Spine2
+    100144: Spine3
+    400000: EyeLeft
+    400002: EyeRight
+    400004: fhair01Mesh
+    400006: Head
+    400008: high-polyMesh
+    400010: Hips
+    400012: //RootNode
+    400014: jeans01Mesh
+    400016: LeftArm
+    400018: LeftFoot
+    400020: LeftForeArm
+    400022: LeftHand
+    400024: LeftHandIndex1
+    400026: LeftHandIndex2
+    400028: LeftHandIndex3
+    400030: LeftHandMiddle1
+    400032: LeftHandMiddle2
+    400034: LeftHandMiddle3
+    400036: LeftHandPinky1
+    400038: LeftHandPinky2
+    400040: LeftHandPinky3
+    400042: LeftHandRing1
+    400044: LeftHandRing2
+    400046: LeftHandRing3
+    400048: LeftHandThumb1
+    400050: LeftHandThumb2
+    400052: LeftHandThumb3
+    400054: LeftInHandIndex
+    400056: LeftInHandMiddle
+    400058: LeftInHandPinky
+    400060: LeftInHandRing
+    400062: LeftLeg
+    400064: LeftShoulder
+    400066: LeftShoulderExtra
+    400068: LeftToeBase
+    400070: LeftUpLeg
+    400072: Neck
+    400074: python
+    400076: pythonMesh
+    400078: RightArm
+    400080: RightFoot
+    400082: RightForeArm
+    400084: RightHand
+    400086: RightHandIndex1
+    400088: RightHandIndex2
+    400090: RightHandIndex3
+    400092: RightHandMiddle1
+    400094: RightHandMiddle2
+    400096: RightHandMiddle3
+    400098: RightHandPinky1
+    400100: RightHandPinky2
+    400102: RightHandPinky3
+    400104: RightHandRing1
+    400106: RightHandRing2
+    400108: RightHandRing3
+    400110: RightHandThumb1
+    400112: RightHandThumb2
+    400114: RightHandThumb3
+    400116: RightInHandIndex
+    400118: RightInHandMiddle
+    400120: RightInHandPinky
+    400122: RightInHandRing
+    400124: RightLeg
+    400126: RightShoulder
+    400128: RightShoulderExtra
+    400130: RightToeBase
+    400132: RightUpLeg
+    400134: shirt01Mesh
+    400136: shoes01_hresMesh
+    400138: Spine
+    400140: Spine1
+    400142: Spine2
+    400144: Spine3
+    4300000: pythonMesh
+    4300002: fhair01Mesh
+    4300004: high-polyMesh
+    4300006: shirt01Mesh
+    4300008: shoes01_hresMesh
+    4300010: jeans01Mesh
+    9500000: //RootNode
+    13700000: fhair01Mesh
+    13700002: high-polyMesh
+    13700004: jeans01Mesh
+    13700006: pythonMesh
+    13700008: shirt01Mesh
+    13700010: shoes01_hresMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: EyeLeft
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: EyeRight
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandThumb1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandThumb2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandThumb3
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftInHandIndex
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandIndex1
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandIndex2
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftInHandMiddle
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandMiddle1
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandMiddle2
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftInHandRing
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandRing1
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandRing2
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftInHandPinky
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandPinky1
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHandPinky2
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandThumb1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandThumb2
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandThumb3
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightInHandIndex
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandIndex1
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandIndex2
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightInHandMiddle
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandMiddle1
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandMiddle2
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightInHandRing
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandRing1
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandRing2
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightInHandPinky
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandPinky1
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHandPinky2
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: HumanLargeLeg(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: fhair01Mesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: high-polyMesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: jeans01Mesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: python
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Hips
+      position: {x: -0, y: .888790011, z: .0245699994}
+      rotation: {x: -.0859846771, y: 0, z: -0, w: .996296465}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftUpLeg
+      position: {x: -.107439987, y: -.0125199994, z: -.00693999929}
+      rotation: {x: .997221708, y: -.0481969416, z: .0392223187, w: -.0410795733}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftLeg
+      position: {x: -0, y: .397549987, z: 0}
+      rotation: {x: .0706861764, y: 0, z: -0, w: .997498631}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftFoot
+      position: {x: -0, y: .410769969, z: 0}
+      rotation: {x: -.536591768, y: .0195017606, z: -.0553647615, w: .841797888}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftToeBase
+      position: {x: -0, y: .132149979, z: 0}
+      rotation: {x: -.239729911, y: 0, z: -0, w: .97083962}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightUpLeg
+      position: {x: .107439987, y: -.0125299999, z: -.00693999929}
+      rotation: {x: .997539937, y: .0473165736, z: -.0303175692, w: -.0419059694}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightLeg
+      position: {x: -0, y: .401049972, z: 0}
+      rotation: {x: .0705529973, y: 0, z: 0, w: .997508049}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightFoot
+      position: {x: -0, y: .405979991, z: 0}
+      rotation: {x: -.537239254, y: -.0266791862, z: .0512267835, w: .841449976}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightToeBase
+      position: {x: -0, y: .134629995, z: 0}
+      rotation: {x: -.239818022, y: 0, z: -0, w: .970817864}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Spine
+      position: {x: -0, y: .143189996, z: 0}
+      rotation: {x: .152454585, y: 0, z: -0, w: .988310456}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Spine1
+      position: {x: -0, y: .0487299971, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Spine2
+      position: {x: -0, y: .0487299971, z: 0}
+      rotation: {x: -.0681841969, y: 0, z: 0, w: .997672737}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Spine3
+      position: {x: -0, y: .163169995, z: 0}
+      rotation: {x: -.0459305011, y: 0, z: -0, w: .99894464}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightShoulder
+      position: {x: .0331499986, y: .0711099952, z: .0860199928}
+      rotation: {x: -.455967307, y: -.334141552, z: -.325163275, w: .758097708}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightShoulderExtra
+      position: {x: -0, y: .119739987, z: 0}
+      rotation: {x: -.610482752, y: -.297608674, z: -.194613591, w: .707718492}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightArm
+      position: {x: -0, y: .0651499927, z: 0}
+      rotation: {x: .28975451, y: .864046812, z: .261928648, w: .317583025}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightForeArm
+      position: {x: -0, y: .25424999, z: 0}
+      rotation: {x: .0203789659, y: -.00744377915, z: .0208748057, w: .999546647}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHand
+      position: {x: -0, y: .227159992, z: 0}
+      rotation: {x: .132119924, y: .627434909, z: -.0557330884, w: .765351951}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightInHandPinky
+      position: {x: .0218599997, y: .0347799957, z: -.00502999965}
+      rotation: {x: -.0736469328, y: .160366848, z: -.0956736133, w: .979645491}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandPinky1
+      position: {x: -0, y: .0497099981, z: 0}
+      rotation: {x: .035070084, y: -.000204116062, z: .000322729262, w: .99938488}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandPinky2
+      position: {x: -0, y: .0220099986, z: 0}
+      rotation: {x: .0399976112, y: -.00472834613, z: .00440671947, w: .999178886}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandPinky3
+      position: {x: -0, y: .0144799994, z: 0}
+      rotation: {x: .0150419781, y: .00742100226, z: -.0136806509, w: .999765754}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightInHandMiddle
+      position: {x: .000839999935, y: .032069996, z: -.0032499996}
+      rotation: {x: -.0490121059, y: .0210634172, z: .00226669479, w: .998573482}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandMiddle1
+      position: {x: -0, y: .0657699928, z: 0}
+      rotation: {x: .0169513505, y: -.00443541957, z: -.0355794393, w: .999213219}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandMiddle2
+      position: {x: -0, y: .0325700007, z: 0}
+      rotation: {x: .0385074988, y: -.00311613013, z: .00233717216, w: .99925077}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandMiddle3
+      position: {x: -0, y: .0255699977, z: 0}
+      rotation: {x: -.00347475661, y: .00486204913, z: -.0128149157, w: .999900043}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightInHandRing
+      position: {x: .0143199982, y: .0328099988, z: -.0040099998}
+      rotation: {x: -.0949338377, y: .0500777476, z: -.0423660427, w: .993320167}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandRing1
+      position: {x: -0, y: .058639992, z: 0}
+      rotation: {x: .0188201442, y: -.0165369157, z: -.0321125574, w: .999170184}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandRing2
+      position: {x: -0, y: .0288199969, z: 0}
+      rotation: {x: .037814822, y: -.00478512002, z: .00454342319, w: .999263048}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandRing3
+      position: {x: -0, y: .0242099985, z: 0}
+      rotation: {x: -.0081086643, y: .00617220253, z: -.0267003495, w: .999591529}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandThumb1
+      position: {x: -.0228799991, y: .0360799991, z: .00164999987}
+      rotation: {x: -.106802151, y: .474533796, z: .348971337, w: .801018059}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandThumb2
+      position: {x: -0, y: .0304999985, z: 0}
+      rotation: {x: .0075092474, y: .174230486, z: -.0335820578, w: .984103501}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandThumb3
+      position: {x: -0, y: .03675, z: 0}
+      rotation: {x: .0371323451, y: -.00848928839, z: .0034693419, w: .999268293}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightInHandIndex
+      position: {x: -.00935999956, y: .0304899979, z: .00116999994}
+      rotation: {x: -.0615102276, y: .224945471, z: .0557598844, w: .970827997}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandIndex1
+      position: {x: -0, y: .0702999979, z: 0}
+      rotation: {x: .0384771936, y: .00724133756, z: -.00246927119, w: .999230266}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandIndex2
+      position: {x: -0, y: .0257999972, z: 0}
+      rotation: {x: .0386021957, y: .00314980675, z: -.000553995254, w: .999249578}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RightHandIndex3
+      position: {x: -0, y: .0231399983, z: 0}
+      rotation: {x: .0169011038, y: -.00585594587, z: .00343548064, w: .99983412}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftShoulder
+      position: {x: -.0331499986, y: .0711099952, z: .0860199928}
+      rotation: {x: -.455968618, y: .334138304, z: .325161457, w: .758099139}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftShoulderExtra
+      position: {x: -0, y: .119739987, z: 0}
+      rotation: {x: -.610482752, y: .297608674, z: .194613591, w: .707718492}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftArm
+      position: {x: -0, y: .0651499927, z: 0}
+      rotation: {x: -.289700806, y: .86411345, z: .261985719, w: -.317403376}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftForeArm
+      position: {x: -0, y: .254229993, z: 0}
+      rotation: {x: .0202976633, y: .00748045836, z: -.0208850019, w: .999547839}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHand
+      position: {x: -0, y: .232299984, z: 0}
+      rotation: {x: .131401047, y: -.62901634, z: .0565065295, w: .764119864}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftInHandPinky
+      position: {x: -.01932, y: .0347099975, z: -.00539999967}
+      rotation: {x: -.0650487542, y: -.161884993, z: .0970348418, w: .979870498}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandPinky1
+      position: {x: -0, y: .050499998, z: 0}
+      rotation: {x: .0352784209, y: .00359803392, z: -.00531628681, w: .999356925}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandPinky2
+      position: {x: -0, y: .0220099986, z: 0}
+      rotation: {x: .0399960689, y: .00472864462, z: -.00440421654, w: .999179006}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandPinky3
+      position: {x: -0, y: .0144799994, z: 0}
+      rotation: {x: .0150411129, y: -.00742100133, z: .013681517, w: .999765754}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftInHandIndex
+      position: {x: .00935999956, y: .0305199996, z: .00119999994}
+      rotation: {x: -.0615753531, y: -.222705275, z: -.0555779487, w: .97135061}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandIndex1
+      position: {x: -0, y: .0702999979, z: 0}
+      rotation: {x: .0384762846, y: -.007241874, z: .00247094012, w: .999230266}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandIndex2
+      position: {x: -0, y: .0257999972, z: 0}
+      rotation: {x: .0386005975, y: -.00314980769, z: .000553429185, w: .999249637}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandIndex3
+      position: {x: -0, y: .0231399983, z: 0}
+      rotation: {x: .0169002321, y: .00585594913, z: -.00343547575, w: .99983418}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftInHandRing
+      position: {x: -.0115699992, y: .0327299982, z: -.00421999954}
+      rotation: {x: -.0911763012, y: -.0409928821, z: .065298669, w: .992845714}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandRing1
+      position: {x: -0, y: .0589499958, z: 0}
+      rotation: {x: .0214909595, y: .0113151362, z: .0317650549, w: .999200225}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandRing2
+      position: {x: -0, y: .0288199969, z: 0}
+      rotation: {x: .037815731, y: .0047861035, z: -.00454473449, w: .999262929}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandRing3
+      position: {x: -0, y: .0242099985, z: 0}
+      rotation: {x: -.00810776837, y: -.00617305189, z: .0267003477, w: .999591529}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftInHandMiddle
+      position: {x: -.000859999971, y: .0320899971, z: -.00318}
+      rotation: {x: -.0494415909, y: -.0186874736, z: -.00218274491, w: .998599827}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandMiddle1
+      position: {x: -0, y: .0657699928, z: 0}
+      rotation: {x: .0169514995, y: .00443345262, z: .0355790518, w: .999213338}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandMiddle2
+      position: {x: -0, y: .0325700007, z: 0}
+      rotation: {x: .0385043137, y: .00311630825, z: -.00233517471, w: .999250829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandMiddle3
+      position: {x: -0, y: .0255699977, z: 0}
+      rotation: {x: -.00347649795, y: -.00486207474, z: .0128157809, w: .999900043}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandThumb1
+      position: {x: .0228799991, y: .0360999964, z: .00159999996}
+      rotation: {x: -.104748666, y: -.467916161, z: -.349630892, w: .804885328}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandThumb2
+      position: {x: -0, y: .0304999985, z: 0}
+      rotation: {x: .00721268961, y: -.178255051, z: .0336464979, w: .983382463}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LeftHandThumb3
+      position: {x: -0, y: .03675, z: 0}
+      rotation: {x: .0371474102, y: .00807435624, z: -.0033073856, w: .999271691}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Neck
+      position: {x: -0, y: .153949991, z: 0}
+      rotation: {x: .104025945, y: 0, z: 0, w: .994574606}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Head
+      position: {x: -0, y: .122709997, z: 0}
+      rotation: {x: -.107644521, y: 0, z: -0, w: .994189501}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: EyeRight
+      position: {x: .0306599978, y: .0166699998, z: .109409995}
+      rotation: {x: .0214200262, y: .628690004, z: .777145267, w: .0183107778}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: EyeLeft
+      position: {x: -.0306599978, y: .0166699998, z: .109409995}
+      rotation: {x: -.0214200262, y: .628690004, z: .777145267, w: -.0183107778}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: pythonMesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: shirt01Mesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: shoes01_hresMesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

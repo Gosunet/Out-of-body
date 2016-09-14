@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<!-- choose height, width and repetitions of doors 
+ -->
+<section  ng-controller="PortesConfigCtrl">
+	<form name="formulaire" ng-submit='executer_click()' class = "row-centered">
+
+		<!-- 		block for width's doors -->
+		<div class="col-sm-4 col-sm-offset-0 col-xs-11 col-xs-offset-0 inline-block-config">
+			<span class="instructions agencement">Nombre de largeurs de porte</span>	
+			<input type="number" ng-pattern="/^[0-9]*$/" min="1" step="1" name="nbTailleLargeur" ng-model="nbTailleLargeur" class="number-input"/>
+			<span ng-show="formulaire.nbTailleLargeur.$error.pattern">Not a valid number</span>
+			<br>
+			<div ng-show="nbTailleLargeur>1">
+				<span class="instructions agencement">Différence entre les largeurs (en %)</span>
+				<input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="diffTailleLargeur" ng-model="diffTailleLargeur" class="number-input"/>
+			<span ng-show="formulaire.diffTailleLargeur.$error.pattern">Not a valid number</span>
+			</div>	
+		</div>
+
+		<!-- 		block for height's doors -->
+		<div ng-show="hauteur" class="col-sm-4 col-sm-offset-0 col-xs-11 col-xs-offset-0 inline-block-config bordure">
+			<span class="instructions agencement">Nombre de hauteurs de porte</span>
+			<input type="number" ng-pattern="/^[0-9]*$/" min="1" step="1" name="nbTailleHauteur" ng-model="nbTailleHauteur" class="number-input"/>		
+			<span ng-show="formulaire.nbTailleHauteur.$error.pattern">Not a valid number</span>
+			<br>
+			<div ng-show="nbTailleHauteur>1">
+				<span class="instructions agencement">Différence entre les hauteurs (en %)</span>
+				<input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="diffTailleHauteur" ng-model="diffTailleHauteur" class="number-input"/>
+			<span ng-show="formulaire.diffTailleHauteur.$error.pattern">Not a valid number</span>
+			</div>	
+		</div>
+
+		<!-- 		block for repetitions' doors -->
+		<div class="col-sm-3 col-sm-offset-0 col-xs-11 col-xs-offset-0 inline-block-config">
+			<span class="instructions agencement">Nombre de répétitions</span>
+			<input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="nbRepet" ng-model="nbRepet" class="number-input"/>
+			<span ng-show="formulaire.nbRepet.$error.pattern">Not a valid number</span>
+		</div>
+
+		<div class="instructions">Total : {{nbEssai}} tests</div>
+		<div class="warning-msg">{{informationsDonnees}}</div>
+		<div class ="row">
+			<a class="btn btn-icon left btn_config" ng-click="previous()">
+	 			<i class="fa fa-chevron-left fa-lg"></i> Retour
+	 		</a>
+			<input type="submit" class="btn btn-icon right btn_config" ng-disabled="formulaire.$invalid" value="Lancer l'exercice"/>
+		</div>
+	</form>
+</section>

@@ -1,0 +1,37 @@
+/*Style for the door choice part*/
+@media (min-width: 767px) {
+	input.btn_portes{
+		display:inline-block;
+		height: 20vw;
+	    float:none;
+	    text-align:center;
+	    font-size: 1.6vw;
+	    word-wrap: break-word;
+	    margin-top: 50px;
+	    margin-bottom: 40px;
+	    padding-left: 2px;
+	    padding-right: 2px;
+	}
+	
+	.previous_row {
+		word-wrap: normal;
+		font-size: 1.6vw;
+		margin-left: 30px;
+	}
+}
+
+@media (max-width: 767px) {
+	input.btn_portes{
+		display:inline-block;
+		height: 10vw;
+	    float:none;
+	    text-align:center;
+	    font-size: 3.2vw;
+	    word-wrap: break-word;
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    padding-left: 8px;
+	    padding-right: 2px;
+	}
+}
+

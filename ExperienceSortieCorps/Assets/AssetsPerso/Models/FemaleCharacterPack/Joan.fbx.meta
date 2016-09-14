@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 6142a6b8fc847a24aa567290b62ea54b
+labels:
+- rig
+- charactercontroller
+- playablecharacter
+- mesh
+- rigged
+- 3D
+- model
+- character
+- animated
+- motion-capture
+- mo-cap
+- mocap
+- motion
+- animation
+- mixamo
+- lady
+- woman
+- girl
+- female
+- Human
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Head
+    100002: HeadTop_End
+    100004: Hips
+    100006: //RootNode
+    100008: joan_Casual_Female_Lod_0
+    100010: LeftArm
+    100012: LeftFoot
+    100014: LeftFootToeBase_End
+    100016: LeftForeArm
+    100018: LeftHand
+    100020: LeftHandIndex1
+    100022: LeftHandIndex2
+    100024: LeftHandIndex3_End
+    100026: LeftHandThumb1
+    100028: LeftHandThumb2_End
+    100030: LeftInHandThumb
+    100032: LeftLeg
+    100034: LeftShoulder
+    100036: LeftToeBase
+    100038: LeftUpLeg
+    100040: Neck
+    100042: Neck1
+    100044: RightArm
+    100046: RightFoot
+    100048: RightFootToeBase_End
+    100050: RightForeArm
+    100052: RightHand
+    100054: RightHandIndex1
+    100056: RightHandIndex2
+    100058: RightHandIndex3_End
+    100060: RightHandThumb1
+    100062: RightHandThumb2_End
+    100064: RightInHandThumb
+    100066: RightLeg
+    100068: RightShoulder
+    100070: RightToeBase
+    100072: RightUpLeg
+    100074: Spine
+    100076: Spine1
+    100078: Spine2
+    400000: Head
+    400002: HeadTop_End
+    400004: Hips
+    400006: //RootNode
+    400008: joan_Casual_Female_Lod_0
+    400010: LeftArm
+    400012: LeftFoot
+    400014: LeftFootToeBase_End
+    400016: LeftForeArm
+    400018: LeftHand
+    400020: LeftHandIndex1
+    400022: LeftHandIndex2
+    400024: LeftHandIndex3_End
+    400026: LeftHandThumb1
+    400028: LeftHandThumb2_End
+    400030: LeftInHandThumb
+    400032: LeftLeg
+    400034: LeftShoulder
+    400036: LeftToeBase
+    400038: LeftUpLeg
+    400040: Neck
+    400042: Neck1
+    400044: RightArm
+    400046: RightFoot
+    400048: RightFootToeBase_End
+    400050: RightForeArm
+    400052: RightHand
+    400054: RightHandIndex1
+    400056: RightHandIndex2
+    400058: RightHandIndex3_End
+    400060: RightHandThumb1
+    400062: RightHandThumb2_End
+    400064: RightInHandThumb
+    400066: RightLeg
+    400068: RightShoulder
+    400070: RightToeBase
+    400072: RightUpLeg
+    400074: Spine
+    400076: Spine1
+    400078: Spine2
+    4300000: Joan_Mesh
+    4300002: joan_Casual_Female_Lod_1
+    4300004: joan_Casual_Female_Lod_0
+    11100000: //RootNode
+    13700000: joan_Casual_Female_Lod_0
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 180
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
