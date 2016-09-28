@@ -14,14 +14,14 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 
 	// Initialistion of numbers : load last values or default values
 	initDemiePorte = function() {
-		$scope.nbTailleLargeur =Number(window.localStorage["local_nbTailleLargeur"]) | 1;
+		$scope.nbTailleLargeur =Number(window.localStorage["local_nbTailleLargeur"]);
 		$scope.diffTailleLargeur =Number(window.localStorage["local_diffTailleLargeur"]) | 0;
 		$scope.nbTailleHauteur = Number(1) ;
 		$scope.diffTailleHauteur = Number(0);
 		$scope.nbRepet =Number(window.localStorage["local_nbRepet"]) | 0;
 	};
 	initHauteur = function() {
-		$scope.nbTailleHauteur =Number(window.localStorage["local_nbTailleHauteur"]) | 1;
+		$scope.nbTailleHauteur =Number(window.localStorage["local_nbTailleHauteur"]);
 		$scope.diffTailleHauteur =Number(window.localStorage["local_diffTailleHauteur"]) | 0;
 	};
 
