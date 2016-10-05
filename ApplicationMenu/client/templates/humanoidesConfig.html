@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<!-- choose width and repetitions 
+ -->
+<section ng-controller="HumanoidesConfigCtrl">
+    <form name="formulaire" ng-submit='executer_click()' class='row-centered'>
+
+        <!-- 		block for width's doors -->
+        <div class="col-sm-4 col-sm-offset-0 col-xs-11 col-xs-offset-0 inline-block-config">
+            <span class="instructions agencement">Nombre de passages</span>
+            <input type="number" ng-pattern="/^[0-9]*$/" min="1" step="1" name="nbIntervalle" ng-model="nbIntervalle" class="number-input" />
+            <span ng-show="formulaire.nbIntervalle.$error.pattern">Not a valid number</span>
+            <br>
+            <div ng-show="nbIntervalle>1">
+                <span class="instructions agencement">Différence entre les largeurs (en %)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="diffIntervalle" ng-model="diffIntervalle" class="number-input" />
+                <span ng-show="formulaire.diffIntervalle.$error.pattern">Not a valid number</span>
+            </div>
+        </div>
+        <!-- 		block for repetitions' doors -->
+        <div class="col-sm-3 col-sm-offset-0 col-xs-11 col-xs-offset-0 inline-block-config">
+            <span class="instructions agencement">Nombre de répétitions</span>
+            <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="nbRepet" ng-model="nbRepet" class="number-input" />
+            <span ng-show="formulaire.nbRepet.$error.pattern">Not a valid number</span>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-icon left btn_config" ng-click="previous()">
+                <i class="fa fa-chevron-left fa-lg"></i> Retour
+            </a>
+            <input type="submit" class="btn btn-icon right btn_config" ng-disabled="formulaire.$invalid" value="Lancer l'exercice" />
+        </div>
+
+    </form>
+</section>

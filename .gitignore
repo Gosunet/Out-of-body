@@ -26,3 +26,5 @@ sysinfo.txt
 #OculuseUnityPatcher
 /ExperienceSortieCorps/Assets/OVR/Editor/OculusUnityPatcher_32.exe
 /ExperienceSortieCorps/Assets/OVR/Editor/OculusUnityPatcher_64.exe
+*.meta
+ExperienceSortieCorps/Assets/OVR/Editor/OVRShimLoader.cs

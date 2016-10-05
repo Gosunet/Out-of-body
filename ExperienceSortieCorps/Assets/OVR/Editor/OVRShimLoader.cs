@@ -54,11 +54,7 @@ class OVRShimLoader
 			(OVRUnityVersionChecker.hasD3D11ExclusiveModeSupport) ? D3D11FullscreenMode.ExclusiveMode : D3D11FullscreenMode.FullscreenWindow;
 //#else
 		//PlayerSettings.d3d11ForceExclusiveMode = OVRUnityVersionChecker.hasD3D11ExclusiveModeSupport;
-//#endif
-
-		PlayerSettings.d3d9FullscreenMode =
-			(OVRUnityVersionChecker.hasD3D9ExclusiveModeSupport) ? D3D9FullscreenMode.ExclusiveMode : D3D9FullscreenMode.FullscreenWindow;
-
+//#endif	
 		PlayerSettings.visibleInBackground = true;
 	}
 
