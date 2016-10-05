@@ -24,7 +24,7 @@ menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootSc
 	var sendMessage = function () {
 		var type ="hu";
 		var message = type + '/' + $scope.nbRepet + '_' + $scope.nbIntervalle + '_' + $scope.diffIntervalle;
-		//$http.get(message);
+		$http.get(message);
 		$state.go('runHumanoide');
 	};
 
