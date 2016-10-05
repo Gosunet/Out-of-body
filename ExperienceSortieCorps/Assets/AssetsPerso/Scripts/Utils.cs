@@ -52,6 +52,8 @@ public static class Utils {
 	public readonly static string SOCKET_PORTE_DEMIHAUT = "dh/";
 	public readonly static string SOCKET_PORTE_DEMIBAS = "db/";
 
+    public readonly static string SOCKET_HUMANOIDE = "hu/";
+
 	public readonly static string[] SOCKET_GENDER = {"M", "F"};
 	public readonly static string SOCKET_VALIDATE = "validerAvatar";
 
