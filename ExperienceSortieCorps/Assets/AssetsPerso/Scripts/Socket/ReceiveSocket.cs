@@ -128,6 +128,7 @@ public class ReceiveSocket : MonoBehaviour
 
             // On charge la scène principale
             SceneManager.LoadScene(Utils.MAIN_SCENE);
+            Debug.Log(Utils.CurrentState);
             _socketClient.message = null;
         }
     }

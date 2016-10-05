@@ -26,38 +26,39 @@ public class MainSceneScript : MonoBehaviour
         _DoorsExercices.SetActive(false);
         _CreatePicture.SetActive(false);
         _OutOfBody.SetActive(false);
+
+
+        
+        Debug.Log("Fin de l'initialisation");
+        Debug.Log(Utils.CurrentState);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Activation de la scène adéquate
-
         switch (Utils.CurrentState)
         {
+            // Cet exercice sert à prendre des captures d'écrans, mais n'est pas utilisé pour le moment.
             case State.CREATE_PICTURE:
-                // Activation des objets de la scène
                 _CreatePicture.SetActive(true);
-                //IsExerciceEnded = false;
                 break;
+            // Permet de choisir les avatars ainsi de faire les exercices de morphing.
             case State.OUT_OF_BODY:
                 _OutOfBody.SetActive(true);
-               // IsExerciceEnded = false;
                 break;
+            // Exercice de choix des portes
             case State.DOORS:
                 _DoorsExercices.SetActive(true);
-                //IsExerciceEndedEnded = false;
                 break;
+
+            // Par défaut, on désactive tout
             default:
                 _DoorsExercices.SetActive(false);
                 _CreatePicture.SetActive(false);
                 _OutOfBody.SetActive(false);
                 break;
         }
-
-        // TO DO : Récupérer un signal STOP des différents scripts
-
-
     }
 
 
