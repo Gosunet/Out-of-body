@@ -30,6 +30,7 @@ app.listen(HTTP_PORT);
 
 // create and start net socket
 var server = net.createServer(function (socket) {
+
     // add socket to array of net sockets.
     clients_unity.push(socket);
 
@@ -61,6 +62,7 @@ var server = net.createServer(function (socket) {
     getAndSendWithParams('oob');
     getAndSendWithParams('validerAvatar');
     getAndSendWithParams('hu');
+
 }).listen(UNITY_PORT);
 
 // function to request web user when scene doors is finished

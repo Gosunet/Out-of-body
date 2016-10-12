@@ -125,10 +125,17 @@ public class ReceiveSocket : MonoBehaviour
 
                 //Application.LoadLevel(Utils.OUTOFBODY_SCENE);
             }
+            else if (message.Contains(Utils.SOCKET_HUMANOID))
+            {
+                PlayerPrefs.SetString(Utils.PREFS_PARAM_HUMANOID, message.Split('/')[1]);
+                Utils.CurrentState = State.HUMANOID;
+
+            }
 
             // On charge la scène principale
             SceneManager.LoadScene(Utils.MAIN_SCENE);
-            Debug.Log(Utils.CurrentState);
+            Debug.Log(Utils.CurrentState);            
+            Debug.Log(message);      
             _socketClient.message = null;
         }
     }

@@ -17,10 +17,10 @@ menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootSc
         $scope.intervalleMin = Number(window.localStorage["local_hum_intervalleMin"]);
         $scope.intervalleMax = Number(window.localStorage["local_hum_intervalleMax"]);
     };
-    
+
      // Initialisation
     initHumanoide();
-    
+
     // Function to send values to server AND go to running exercice state
 	var sendMessage = function () {
 		var type ="hu";
@@ -42,7 +42,7 @@ menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootSc
         $scope.nbEssai = ($scope.nbIntervalle) * $scope.nbRepet;
         saveAllValues();
     });
-    
+
     // Function exectute click on "run exercice" button click : check if all values are corrects
 	$scope.executer_click = function(){
 		$scope.informationsDonnees ="";
@@ -55,16 +55,16 @@ menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootSc
 		else
 			$scope.informationsDonnees = "Tous les champs ne sont pas remplis";
 	};
-    
+
     $scope.intervalleMinChanged = function(){
         if ($scope.intervalleMin > $scope.intervalleMax){
             $scope.intervalleMax = $scope.intervalleMin
         }
     };
-    
+
     $scope.intervalleMaxChanged = function(){
         if ($scope.intervalleMax < $scope.intervalleMin){
             $scope.intervalleMin = $scope.intervalleMax
-        } 
+        }
     };
 });

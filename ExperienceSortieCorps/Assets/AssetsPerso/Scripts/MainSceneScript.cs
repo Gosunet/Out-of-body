@@ -14,7 +14,10 @@ public class MainSceneScript : MonoBehaviour
     [SerializeField]
     private GameObject _OutOfBody;
 
-   // public bool IsExerciceEnded;
+    [SerializeField]
+    private GameObject _HumanoidsExercice;
+
+    //public bool IsExerciceEnded;
 
     // Use this for initialization
     void Start()
@@ -26,8 +29,7 @@ public class MainSceneScript : MonoBehaviour
         _DoorsExercices.SetActive(false);
         _CreatePicture.SetActive(false);
         _OutOfBody.SetActive(false);
-
-
+        _HumanoidsExercice.SetActive(false);
         
         Debug.Log("Fin de l'initialisation");
         Debug.Log(Utils.CurrentState);
@@ -52,11 +54,17 @@ public class MainSceneScript : MonoBehaviour
                 _DoorsExercices.SetActive(true);
                 break;
 
+            case State.HUMANOID:
+                _HumanoidsExercice.SetActive(true);
+                break;
+
             // Par défaut, on désactive tout
             default:
                 _DoorsExercices.SetActive(false);
                 _CreatePicture.SetActive(false);
                 _OutOfBody.SetActive(false);
+                _HumanoidsExercice.SetActive(false);
+
                 break;
         }
     }

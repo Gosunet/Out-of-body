@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,8 +8,14 @@ public class InitSceneHumanoids : MonoBehaviour {
     public GameObject _humanoidRight;
     public GameObject _humanoidLeft;
 
-    public int nb_distance;
-    public int distance_step;
+    // doors counter on the scene.
+    [SerializeField]
+    private GameObject _text;
+
+    // Value got from the socket
+    private int _nbRepetition;
+    private int _nbDistance;
+    private int _percentageDiff;
 
     // Value of initial position of each humanoid
     private Vector3 _posHumanoidRight;
@@ -51,7 +58,7 @@ public class InitSceneHumanoids : MonoBehaviour {
         get
         {
 
-            _distanceMinimal = (float)(_initialDistX  - distance_step/100.0 * _initialDistX);
+            _distanceMinimal = (float)(_initialDistX  - _percentageDiff/100.0 * _initialDistX);
 
             return _distanceMinimal;
         }
@@ -67,7 +74,7 @@ public class InitSceneHumanoids : MonoBehaviour {
     {
         get
         {
-            _distanceMaximal = (float)(_initialDistX + (distance_step / 100.0) * _initialDistX);
+            _distanceMaximal = (float)(_initialDistX + (_percentageDiff / 100.0) * _initialDistX);
             return _distanceMaximal;
         }
 
@@ -76,8 +83,6 @@ public class InitSceneHumanoids : MonoBehaviour {
             _distanceMaximal = value;
         }
     }
-
-
 
     private int _testIndex;
     private int _currentDistance;
@@ -99,6 +104,9 @@ public class InitSceneHumanoids : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        _humanoidLeft.SetActive(true);
+        _humanoidRight.SetActive(true);
+
         _posHumanoidLeft = _humanoidLeft.transform.localPosition;
         _posHumanoidRight = _humanoidRight.transform.localPosition;
 
@@ -114,16 +122,34 @@ public class InitSceneHumanoids : MonoBehaviour {
         Debug.LogWarning(testPosHumGauche);
         Debug.LogWarning(testPosHumDroite);
 
+        initParameters();
+
         intitDistances();
              
         applyScaleDistance();
 
-
 	}
+
+    private void initParameters()
+    {
+        string resSocket = PlayerPrefs.GetString(Utils.PREFS_PARAM_HUMANOID);
+
+        string[] parameters = resSocket.Split('_');
+
+        _nbRepetition = int.Parse(parameters[0]);
+        _nbDistance = int.Parse(parameters[1]);
+        _nbTests = _nbDistance;
+        _percentageDiff = int.Parse(parameters[2]);
+
+        Debug.Log("nb de repetition : " + _nbRepetition);
+        Debug.Log(" nb de test : " + _nbDistance);
+        Debug.Log("pourcentage de diff :" + _percentageDiff);
+
+    }
 
     private void intitDistances()
     {
-        if(nb_distance > 0)
+        if(_nbDistance > 0)
         {
             RangeDistances = getListOfDistanceValue();
         }
@@ -135,13 +161,13 @@ public class InitSceneHumanoids : MonoBehaviour {
         List<float> rangeDistanceValue = new List<float>();
 
         // if nbWidth is an odd number
-        if (nb_distance % 2 != 0)
+        if (_nbDistance % 2 != 0)
         {   
-            for (int i = -nb_distance/2; i < (nb_distance + 1) / 2; i++)
+            for (int i = -_nbDistance/2; i < (_nbDistance + 1) / 2; i++)
             {
                 Debug.LogWarning("i " + i);
 
-                float value = (float)((distance_step * i / 100.0 + 1.0) * _initialDistX);
+                float value = (float)((_percentageDiff * i / 100.0 + 1.0) * _initialDistX);
                 Debug.LogWarning("value " + value);
 
                 rangeDistanceValue.Add(value);
@@ -150,11 +176,9 @@ public class InitSceneHumanoids : MonoBehaviour {
 
         else
         {
-            for (int i = -nb_distance/2; i < nb_distance/2; i++)
+            for (int i = -_nbDistance/2; i < _nbDistance/2; i++)
             {
-                Debug.LogWarning("i " + i);
-
-                float value = (float)((distance_step * i / 100.0 + 1.0) * _initialDistX + distance_step * _initialDistX / (2 * 100));
+                float value = (float)((_percentageDiff * i / 100.0 + 1.0) * _initialDistX + _percentageDiff * _initialDistX / (2 * 100));
                 Debug.LogWarning("value ajoutée : " + value);
                 rangeDistanceValue.Add(value);
             }
@@ -163,26 +187,25 @@ public class InitSceneHumanoids : MonoBehaviour {
         return rangeDistanceValue;
     }
 
+    //private List<float> getAleatoireDistance()
+    //{
+    //    List<float> rangeValeurAleatoire = new List<float>();
+    //    System.Random rnd = new System.Random();
 
-    private List<float> getAleatoireDistance()
-    {
-        List<float> rangeValeurAleatoire = new List<float>();
-        System.Random rnd = new System.Random();
+    //    while (rangeValeurAleatoire.Count <= _nbDistance)
+    //    {
+    //        float aleatoireDistance = (float)(rnd.NextDouble() * (DistanceMaximal - DistanceMinimal) + DistanceMinimal);
 
-        while (rangeValeurAleatoire.Count <= nb_distance)
-        {
-            float aleatoireDistance = (float)(rnd.NextDouble() * (DistanceMaximal - DistanceMinimal) + DistanceMinimal);
+    //        if (!rangeValeurAleatoire.Contains(aleatoireDistance))
+    //        {
+    //            rangeValeurAleatoire.Add(aleatoireDistance);
+    //            string value = "Value added : " + aleatoireDistance;
+    //            Debug.LogWarning(value);
+    //        }
+    //    }       
 
-            if (!rangeValeurAleatoire.Contains(aleatoireDistance))
-            {
-                rangeValeurAleatoire.Add(aleatoireDistance);
-                string value = "Value added : " + aleatoireDistance;
-                Debug.LogWarning(value);
-            }
-        }       
-
-        return rangeValeurAleatoire;
-    }
+    //    return rangeValeurAleatoire;
+    //}
 
     private void applyScaleDistance()
     {
@@ -193,11 +216,10 @@ public class InitSceneHumanoids : MonoBehaviour {
             Vector3 posLeft = _humanoidLeft.transform.localPosition;
             Vector3 posRight = _humanoidRight.transform.localPosition;
      
-
             float newPosX = (float)(RangeDistances[_distanceIndex] / 2.0);
             Debug.LogWarning("Range appliqué:" + newPosX);
 
-            float step = System.Math.Abs(System.Math.Abs(posLeft.x) - newPosX);
+            float step = System.Math.Abs(System.Math.Abs(posLeft.x) - System.Math.Abs(newPosX));
 
             if(newPosX < System.Math.Abs(posLeft.x))
             {
@@ -211,7 +233,11 @@ public class InitSceneHumanoids : MonoBehaviour {
             _humanoidRight.transform.Translate(_posHumanoidRight);
 
             RangeDistances.RemoveAt(_distanceIndex);
-            nb_distance--;
+            _nbDistance--;
+            _nbAnswers++;
+
+            _text.GetComponent<Text>().text = _nbAnswers.ToString() + "/" + _nbTests.ToString();
+
         }
 
     }
@@ -232,7 +258,7 @@ public class InitSceneHumanoids : MonoBehaviour {
 
             if (_next)
             {
-                if (nb_distance> 0)
+                if (_nbDistance> 0)
                 {
                     applyScaleDistance();
                     _next = false;
