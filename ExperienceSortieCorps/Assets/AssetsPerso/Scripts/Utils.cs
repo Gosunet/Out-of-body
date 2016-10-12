@@ -18,6 +18,7 @@ public static class Utils
     public readonly static string PREFS_MODEL = "Model";
     public readonly static string PREFS_DOORS = "doors";
     public readonly static string PREFS_PARAM_DOORS = "param_doors";
+    public readonly static string PREFS_PARAM_HUMANOID = "param_humanoid";
     public readonly static string[] MODELS_DIRECTORY = { "Models/Homme/", "Models/Femme/" };
 
     public readonly static string FULL_DOORS = "fullDoors";
@@ -33,6 +34,8 @@ public static class Utils
     public readonly static string DOORS_SCENE = "Doors";
     public readonly static string WAITING_SCENE = "Waiting Scene";
     public readonly static string OUTOFBODY_SCENE = "Out Of Body";
+
+    public readonly static string HUMANOID_SCENE = "Humanoids";
 
     public readonly static string MAIN_SCENE = "MainScene";
     public static State CurrentState = State.WAITING;
@@ -58,6 +61,8 @@ public static class Utils
     public readonly static string SOCKET_PORTE_DEMIHAUT = "dh/";
     public readonly static string SOCKET_PORTE_DEMIBAS = "db/";
 
+    public readonly static string SOCKET_HUMANOID = "hu/"; 
+
     public readonly static string[] SOCKET_GENDER = { "M", "F" };
     public readonly static string SOCKET_VALIDATE = "validerAvatar";
 
@@ -69,5 +74,6 @@ public enum State
     DOORS,
     WAITING,
     OUT_OF_BODY,
+    HUMANOID,
     CREATE_PICTURE
 };

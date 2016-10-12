@@ -54,7 +54,8 @@ var server = net.createServer(function (socket) {
   getAndSendWithoutParams('F_avatar');
 
   requestDoorsFinish();
-
+  
+  getAndSendWithParams('hu');
   getAndSendWithParams('e');
   getAndSendWithParams('db');
   getAndSendWithParams('dh');
