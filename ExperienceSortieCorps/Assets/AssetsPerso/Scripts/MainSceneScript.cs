@@ -63,7 +63,7 @@ public class MainSceneScript : MonoBehaviour
                 _DoorsExercices.SetActive(false);
                 _CreatePicture.SetActive(false);
                 _OutOfBody.SetActive(false);
-                _OutOfBody.SetActive(false);
+                _HumanoidsExercice.SetActive(false);
 
                 break;
         }
