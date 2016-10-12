@@ -12,9 +12,12 @@
             <span ng-show="formulaire.nbTailleLargeur.$error.pattern">Not a valid number</span>
             <br>
             <div ng-show="nbTailleLargeur>1">
-                <span class="instructions agencement">Différence entre les largeurs (en %)</span>
-                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="diffTailleLargeur" ng-model="diffTailleLargeur" class="number-input" />
-                <span ng-show="formulaire.diffTailleLargeur.$error.pattern">Not a valid number</span>
+                <span class="instructions agencement">Largeur minimum (en cm)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="largeurMin" ng-model="largeurMin" ng-change="largeurMinChanged()" class="number-input" ng-model-options="{debounce: 750}" />
+            </div>
+            <div ng-show="nbTailleLargeur>1">
+                <span class="instructions agencement">Largeur maximum (en cm)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="largeurMax" ng-model="largeurMax" class="number-input" ng-change="largeurMaxChanged()" ng-model-options="{debounce: 750}" />
             </div>
         </div>
 
@@ -25,9 +28,12 @@
             <span ng-show="formulaire.nbTailleHauteur.$error.pattern">Not a valid number</span>
             <br>
             <div ng-show="nbTailleHauteur>1">
-                <span class="instructions agencement">Différence entre les hauteurs (en %)</span>
-                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="diffTailleHauteur" ng-model="diffTailleHauteur" class="number-input" />
-                <span ng-show="formulaire.diffTailleHauteur.$error.pattern">Not a valid number</span>
+                <span class="instructions agencement">Hauteur minimum (en cm)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="hauteurMin" ng-model="hauteurMin" ng-change="hauteurMinChanged()" class="number-input" ng-model-options="{debounce: 750}" />
+            </div>
+            <div ng-show="nbTailleHauteur>1">
+                <span class="instructions agencement">Hauteur maximum (en cm)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="hauteurMax" ng-model="hauteurMax" class="number-input" ng-change="hauteurMaxChanged()" ng-model-options="{debounce: 750}" />
             </div>
         </div>
 
