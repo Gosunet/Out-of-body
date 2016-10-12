@@ -21,6 +21,9 @@
     float:right;
 	margin-top: 20px;
 }
+.title{
+    font-family: "Roboto", Roboto, sans-serif;
+}
 .bandeau{
 	background-color: #ededef;
 	margin-bottom: 20px;

@@ -12,9 +12,12 @@
             <span ng-show="formulaire.nbIntervalle.$error.pattern">Not a valid number</span>
             <br>
             <div ng-show="nbIntervalle>1">
-                <span class="instructions agencement">Différence entre les largeurs (en %)</span>
-                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="diffIntervalle" ng-model="diffIntervalle" class="number-input" />
-                <span ng-show="formulaire.diffIntervalle.$error.pattern">Not a valid number</span>
+                <span class="instructions agencement">Minimum de l'intervalle (en cm)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="intervalleMin" ng-model="intervalleMin" ng-change="intervalleMinChanged()" class="number-input" ng-model-options="{debounce: 750}" />
+            </div>
+            <div ng-show="nbIntervalle>1">
+                <span class="instructions agencement">Maximum de l'intervalle (en cm)</span>
+                <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="intervalleMax" ng-model="intervalleMax" class="number-input" ng-change="intervalleMaxChanged()" ng-model-options="{debounce: 750}" />
             </div>
         </div>
         <!-- 		block for repetitions' doors -->
@@ -23,7 +26,7 @@
             <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="nbRepet" ng-model="nbRepet" class="number-input" />
             <span ng-show="formulaire.nbRepet.$error.pattern">Not a valid number</span>
         </div>
-
+        <div class="warning-msg">{{informationsDonnees}}</div>
         <div class="row">
             <a class="btn btn-icon left btn_config" ng-click="previous()">
                 <i class="fa fa-chevron-left fa-lg"></i> Retour
