@@ -25,6 +25,7 @@ public class InitModel : MonoBehaviour
         _goSrc.name = model[0].Split('/')[2];
         _goSrc.transform.localPosition = Vector3.zero;
         _goSrc.transform.localRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+      
         initAvatar();
         initKinect();
     }
@@ -76,6 +77,8 @@ public class InitModel : MonoBehaviour
     void initAvatar()
     {
         GameObject modelRoot = _goSrc.transform.FindChild("python").gameObject;
+        // Scale du model  ?
+        //_goSrc.transform.localScale += new Vector3(7f, 7f, 7f);
 
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(-0.5f, 0.3f, 0.3f, 0.8f);
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftShoulderExtra").transform.localRotation = new Quaternion(-0.6f, 0.3f, 0.2f, 0.7f);
@@ -98,6 +101,8 @@ public class InitModel : MonoBehaviour
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightShoulderExtra/RightArm/RightForeArm/RightHand/RightInHandMiddle").transform.localRotation = new Quaternion(-0.1f, 0.0f, 0.0f, 1.0f);
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightShoulderExtra/RightArm/RightForeArm/RightHand/RightInHandPinky").transform.localRotation = new Quaternion(-0.1f, 0.2f, -0.1f, 1.0f);
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightShoulderExtra/RightArm/RightForeArm/RightHand/RightInHandRing").transform.localRotation = new Quaternion(-0.1f, 0.1f, 0.0f, 1.0f);
+
+
     }
 
     public GameObject posAvatar
