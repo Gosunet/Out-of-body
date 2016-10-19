@@ -27,3 +27,9 @@ sysinfo.txt
 /ExperienceSortieCorps/Assets/OVR/Editor/OculusUnityPatcher_32.exe
 /ExperienceSortieCorps/Assets/OVR/Editor/OculusUnityPatcher_64.exe
 *.meta
+ExperienceSortieCorps/ProjectSettings/ProjectVersion.txt
+ExperienceSortieCorps/ProjectSettings/GraphicsSettings.asset
+ExperienceSortieCorps/Assets/AssetsPerso/Models/Door.fbm.meta
+ExperienceSortieCorps/ProjectSettings/ProjectVersion.txt
+ExperienceSortieCorps/Assets/AssetsPerso/Models/Door.fbm.meta
+ApplicationMenu/build/build.min.js
