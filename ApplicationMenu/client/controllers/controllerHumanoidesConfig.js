@@ -49,7 +49,7 @@ menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootSc
 		if ($scope.nbEssai > 0 & $scope.nbIntervalle == 1){
 				sendMessage();
 		}
-		else if ($scope.nbEssai > 0 & $scope.nbIntervalle > 1 & $scope.intervalleMax > 1 & $scope.intervalleMin > 1) {
+		else if ($scope.nbEssai > 0 & $scope.nbIntervalle > 1 & $scope.intervalleMax >= 1 & $scope.intervalleMin >= 1) {
 				sendMessage()
 		}
 		else
