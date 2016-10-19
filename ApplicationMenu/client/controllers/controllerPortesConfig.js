@@ -54,7 +54,7 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 			else
 				sendMessage();
 		}
-		else if ($scope.nbEssai > 0 & $scope.nbTailleLargeur > 1 & $scope.largeurMin >= 1 & $scope.largeurMax){
+		else if ($scope.nbEssai > 0 & $scope.nbTailleLargeur > 1 & $scope.largeurMin >= 1 & $scope.largeurMax >= 1){
 			if($scope.hauteur)
 				testerH();
 			else
