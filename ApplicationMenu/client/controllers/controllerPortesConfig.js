@@ -14,15 +14,18 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 
 	// Initialistion of numbers : load last values or default values
 	initDemiePorte = function() {
-		$scope.nbTailleLargeur =Number(window.localStorage["local_nbTailleLargeur"]) | 1;
-		$scope.diffTailleLargeur =Number(window.localStorage["local_diffTailleLargeur"]) | 0;
+		$scope.nbTailleLargeur =Number(window.localStorage["local_nbTailleLargeur"]);
 		$scope.nbTailleHauteur = Number(1) ;
-		$scope.diffTailleHauteur = Number(0);
+		$scope.largeurMin = Number(window.localStorage["local_largeurMin"]);
+        $scope.largeurMax = Number(window.localStorage["local_largeurMax"]);
+        $scope.hauteurMin = Number(window.localStorage["local_hauteurMin"]);
+        $scope.hauteurMax = Number(window.localStorage["local_hauteurMax"]);
 		$scope.nbRepet =Number(window.localStorage["local_nbRepet"]) | 0;
 	};
 	initHauteur = function() {
-		$scope.nbTailleHauteur =Number(window.localStorage["local_nbTailleHauteur"]) | 1;
-		$scope.diffTailleHauteur =Number(window.localStorage["local_diffTailleHauteur"]) | 0;
+		$scope.nbTailleHauteur =Number(window.localStorage["local_nbTailleHauteur"]);
+		$scope.hauteurMin = Number(window.localStorage["local_hauteurMin"]) | 0;
+        $scope.hauteurMax = Number(window.localStorage["local_hauteurMax"]) | 0;
 	};
 
 	// Determine if we are with full doors or only half-doors AND call init function related
@@ -37,7 +40,7 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 	}
 
 	// Watch function to update result value and save all values
-	$scope.$watch('nbRepet + nbTailleLargeur + nbTailleHauteur + diffTailleLargeur + diffTailleHauteur', function() {
+	$scope.$watch('nbRepet + nbTailleLargeur + nbTailleHauteur + largeurMin + largeurMax + hauteurMin + hauteurMax', function() {
 		$scope.nbEssai = ($scope.nbTailleLargeur * $scope.nbTailleHauteur) * $scope.nbRepet;
 		saveAllValues();
 	});
@@ -51,7 +54,7 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 			else
 				sendMessage();
 		}
-		else if ($scope.nbEssai > 0 & $scope.nbTailleLargeur > 1 & $scope.diffTailleLargeur != 0){
+		else if ($scope.nbEssai > 0 & $scope.nbTailleLargeur > 1 & $scope.largeurMin >= 1 & $scope.largeurMax >= 1){
 			if($scope.hauteur)
 				testerH();
 			else
@@ -65,7 +68,7 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 	testerH = function(){
 		if($scope.nbTailleHauteur == 1)
 			sendMessage();
-		else if ($scope.nbTailleHauteur > 1 & $scope.diffTailleHauteur != 0)
+		else if ($scope.nbTailleHauteur > 1 & $scope.hauteurMin >= 1 & $scope.hauteurMax >= 1)
 			sendMessage();
 		else
 			$scope.informationsDonnees = "Tous les champs ne sont pas remplis";
@@ -81,7 +84,7 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 		else
 			type = "db";
 
-		var message = type + '/' + $scope.nbRepet + '_' + $scope.nbTailleLargeur + '_' + $scope.diffTailleLargeur + '_' + $scope.nbTailleHauteur + '_' + $scope.diffTailleHauteur;
+		var message = type + '/' + $scope.nbRepet + '_' + $scope.nbTailleLargeur + '_' + $scope.largeurMin + '_' + $scope.largeurMax + '_' + $scope.nbTailleHauteur + '_' + $scope.hauteurMin + '_' + $scope.hauteurMax;
 		$http.get(message);
 		$state.go('runPortes');
 	};
@@ -90,15 +93,43 @@ menu.controller('PortesConfigCtrl', function ($scope,$state,$http, $rootScope, $
 	saveAllValues=function() {
 		window.localStorage["local_nbRepet"] = $scope.nbRepet;
 		window.localStorage["local_nbTailleLargeur"] = $scope.nbTailleLargeur;
-		window.localStorage["local_diffTailleLargeur"] = $scope.diffTailleLargeur;
+		window.localStorage["local_largeurMin"] = $scope.largeurMin;
+        window.localStorage["local_largeurMax"] = $scope.largeurMax;
 		if($scope.hauteur){
 			window.localStorage["local_nbTailleHauteur"] = $scope.nbTailleHauteur;
-			window.localStorage["local_diffTailleHauteur"] = $scope.diffTailleHauteur;
+			window.localStorage["local_hauteurMin"] = $scope.hauteurMin;
+            window.localStorage["local_hauteurMax"] = $scope.hauteurMax;
 		}
 	};
 
 	// Previous function : go back to door type choice
 	$scope.previous = function () {
 		$state.go('portes');
-	}
+	};
+    
+    $scope.largeurMinChanged = function () {
+        if ($scope.largeurMin > $scope.largeurMax){
+            $scope.largeurMax = $scope.largeurMin
+        }
+    };
+    
+    $scope.largeurMaxChanged = function () {
+        if ($scope.largeurMax < $scope.largeurMin){
+            $scope.largeurMin = $scope.largeurMax
+        } 
+    };
+    
+    $scope.hauteurMaxChanged = function () {
+        if ($scope.hauteurMax < $scope.hauteurMin){
+            $scope.hauteurMin = $scope.hauteurMax
+        } 
+    };
+    
+    $scope.hauteurMinChanged = function () {
+        if ($scope.hauteurMin > $scope.hauteurMax){
+            $scope.hauteurMax = $scope.hauteurMin
+        } 
+    };
+    
+    
 });

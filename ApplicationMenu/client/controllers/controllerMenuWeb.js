@@ -51,5 +51,15 @@ menu.config(function($stateProvider, $urlRouterProvider){
 	.state('runPortes',{
 		url: "/portes/en_cours",
 		templateUrl: "client/templates/runPortes.html"
-	});
+	})
+    // Humanoides part
+    .state('humanoidesConfig', {
+        url : "/humanoidesConfig",
+        templateUrl: "client/templates/humanoidesConfig.html"
+    })
+    .state('runHumanoide', {
+        url : "/humanoidesConfig/en_cours",
+        templateUrl: "client/templates/runHumanoide.html"
+    })
+    
 });

@@ -16,78 +16,81 @@ var clients_unity = [];
 var door_finish = false;
 
 // if user request for home page.
-app.get('/', function(req, res){
-  if(req=="portes")
-    res.sendFile(path.join(__dirname,'../client/templates','/portes.html'));
-  else
-    res.sendFile(path.join(__dirname,'../client/templates','/menuWeb.html'));
+app.get('/', function (req, res) {
+    if (req == "portes")
+        res.sendFile(path.join(__dirname, '../client/templates', '/portes.html'));
+    else
+        res.sendFile(path.join(__dirname, '../client/templates', '/menuWeb.html'));
 });
 
 
-app.use(express.static(__dirname+"/.."));
+app.use(express.static(__dirname + "/.."));
 // start webserver
 app.listen(HTTP_PORT);
 
 // create and start net socket
 var server = net.createServer(function (socket) {
-  // add socket to array of net sockets.
-  clients_unity.push(socket);
 
-  // event when socket is closed.
-  socket.on('close', function(e) {
-    clients_unity.splice(clients_unity.indexOf(socket), 1);
-  });
+    // add socket to array of net sockets.
+    clients_unity.push(socket);
 
-  // event if new socket is connecting
-  socket.on('data', function(data) {
-    if (data.toString() === "door_finish") {
-      door_finish = true;
-    }
-  });
+    // event when socket is closed.
+    socket.on('close', function (e) {
+        clients_unity.splice(clients_unity.indexOf(socket), 1);
+    });
 
-  process.on('uncaughtException', function (err) {});
+    // event if new socket is connecting
+    socket.on('data', function (data) {
+        if (data.toString() === "door_finish") {
+            door_finish = true;
+        }
+    });
 
-  getAndSendWithoutParams('avatar');
-  getAndSendWithoutParams('exit');
-  getAndSendWithoutParams('stop');
-  getAndSendWithoutParams('M_avatar');
-  getAndSendWithoutParams('F_avatar');
+    process.on('uncaughtException', function (err) {});
 
-  requestDoorsFinish();
+    getAndSendWithoutParams('avatar');
+    getAndSendWithoutParams('exit');
+    getAndSendWithoutParams('stop');
+    getAndSendWithoutParams('M_avatar');
+    getAndSendWithoutParams('F_avatar');
 
-  getAndSendWithParams('e');
-  getAndSendWithParams('db');
-  getAndSendWithParams('dh');
-  getAndSendWithParams('oob');
-  getAndSendWithParams('validerAvatar');
+    requestDoorsFinish();
+
+    getAndSendWithParams('e');
+    getAndSendWithParams('db');
+    getAndSendWithParams('dh');
+    getAndSendWithParams('oob');
+    getAndSendWithParams('validerAvatar');
+    getAndSendWithParams('hu');
+
 }).listen(UNITY_PORT);
 
 // function to request web user when scene doors is finished
 function requestDoorsFinish() {
-  app.get('/porte', function(req, res) {
-    if (door_finish == true) {
-      door_finish = false;
-      res.end();
-    } else {
-      res.sendStatus(403);
-    }
-  });
+    app.get('/porte', function (req, res) {
+        if (door_finish == true) {
+            door_finish = false;
+            res.end();
+        } else {
+            res.sendStatus(403);
+        }
+    });
 }
 
 // create event if receive http get request url without parameters to communique with unity
 function getAndSendWithoutParams(url) {
-  app.get('/' + url, function(req, res) {
-    clients_unity[0].write(url);
-    res.end();
-  });
+    app.get('/' + url, function (req, res) {
+        clients_unity[0].write(url);
+        res.end();
+    });
 }
 
 // create event if receive http get request with parameters to communique with unity
 function getAndSendWithParams(url) {
-  url += "/:values";
-  app.get('/' + url, function(req, res) {
-    var send = req.originalUrl.replace('/', '');
-    clients_unity[0].write(send);
-    res.end();
-  });
+    url += "/:values";
+    app.get('/' + url, function (req, res) {
+        var send = req.originalUrl.replace('/', '');
+        clients_unity[0].write(send);
+        res.end();
+    });
 }
