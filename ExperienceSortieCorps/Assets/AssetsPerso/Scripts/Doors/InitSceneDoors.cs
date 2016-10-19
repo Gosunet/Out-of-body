@@ -276,6 +276,16 @@ public class InitSceneDoors : MonoBehaviour
 
     }
 
+    void initDistance()
+    {
+        string resSocket = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
+        string[] parameters = resSocket.Split('_');
+
+        int nbTries = int.Parse(parameters[0]);
+
+
+
+    }
     /// <summary>
     /// Update scale of the door whith the value _widthIndex
     /// </summary>

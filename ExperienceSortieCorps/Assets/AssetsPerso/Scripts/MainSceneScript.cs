@@ -53,7 +53,6 @@ public class MainSceneScript : MonoBehaviour
             case State.DOORS:
                 _DoorsExercices.SetActive(true);
                 break;
-
             case State.HUMANOID:
                 _HumanoidsExercice.SetActive(true);
                 break;
