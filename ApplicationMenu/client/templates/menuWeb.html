@@ -3,24 +3,31 @@
 <!-- Initialization of all script and librairies
  -->
 <html ng-app="menu">
+
 <head>
-		<!-- fav icon setting -->
-	<link rel="shortcut icon"  type="image/x-icon" href="client/favicon (2).ico" />
-		<!-- web page title -->
-	<title>Out of Body</title>
-		<!-- node modules imports -->
-	<script src="node_modules/angular/angular.js"></script>
-	<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-	<script src="node_modules/ngStorage/ngStorage.min.js"></script>
-	<link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<!-- bootstrap -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- our java script files imports -->
-	<script src="build/build.min.js"></script>
-<!-- 	<script src="client/controllers/controllerMenuWeb.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <!-- fav icon setting -->
+    <link rel="shortcut icon" type="image/x-icon" href="client/favicon (2).ico" />
+    <!-- web page title -->
+    <title>Out of Body</title>
+    <!-- node modules imports -->
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/ngStorage/ngStorage.min.js"></script>
+    <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/node_modules/angular-aria/angular-aria.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+    <!-- bootstrap -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- our java script files imports -->
+    <script src="build/build.min.js"></script>
+    <!-- 	<script src="client/controllers/controllerMenuWeb.js"></script>
 	<script src="client/controllers/controllerMainMenu.js"></script>
 	<script src="client/controllers/controllerOob.js"></script>
 	<script src="client/controllers/controllerOobRun.js"></script>
@@ -29,30 +36,30 @@
 	<script src="client/controllers/controllerPortesConfig.js"></script>
 	<script src="client/controllers/controllerAvatar.js"></script>
 	<script src="client/controllers/controllerAvatarMedecin.js"></script> -->
-	<script src="client/directives/directiveChrono.js"></script>
-		<!-- our css files imports -->
-	<link rel="stylesheet" type="text/css" href="build/build.min.css">
+    <script src="client/directives/directiveChrono.js"></script>
+    <!-- our css files imports -->
+    <link rel="stylesheet" type="text/css" href="build/build.min.css">
 
-</head >
+</head>
+<body ng-controller='menuWebCtrl'>
+    <header class="bandeau">
+        <h1 class="title col-sm-12 col-xs-12">Menu Principal</h1>
+        <!-- Breadcrumb -->
+        <div class="all-breadcrumb btn-group btn-breadcrumb">
+            <a ui-sref="mainMenu" class="btn btn-default" ng-if="suivant;">{{chemin}}</a>
+            <a ui-sref="{{stateChemin1}}" class="btn btn-default" ng-if="chemin1 && suivant;">{{chemin1}}</a>
+            <a ui-sref="{{stateChemin2}}" class="btn btn-default" ng-if="chemin2 && suivant;">{{chemin2}}</a>
 
-<body  ng-controller='menuWebCtrl'>	
-	<header class="bandeau">
-		<h1 class="title col-sm-12 col-xs-12">Menu Principal</h1>
-		<!-- Breadcrumb -->
-		<div class="all-breadcrumb btn-group btn-breadcrumb">
-		    <a ui-sref="mainMenu" class="btn btn-default" ng-if="suivant;">{{chemin}}</a>
-		    <a ui-sref="{{stateChemin1}}" class="btn btn-default" ng-if="chemin1 && suivant;">{{chemin1}}</a>
-		    <a ui-sref="{{stateChemin2}}" class="btn btn-default" ng-if="chemin2 && suivant;">{{chemin2}}</a>
+            <a ng-click="exit()" class="btn btn-default" ng-if="(suivant == false);">{{chemin}}</a>
+            <a ng-click="exit(stateChemin1)" class="btn btn-default" ng-if="chemin1 && (suivant == false);">{{chemin1}}</a>
+            <a ng-click="exit(stateChemin2)" class="btn btn-default" ng-if="chemin2 && (suivant == false);">{{chemin2}}</a>
 
-		    <a ng-click="exit()" class="btn btn-default" ng-if="(suivant == false);">{{chemin}}</a>
-		    <a ng-click="exit(stateChemin1)" class="btn btn-default" ng-if="chemin1 && (suivant == false);">{{chemin1}}</a>
-		    <a ng-click="exit(stateChemin2)" class="btn btn-default" ng-if="chemin2 && (suivant == false);">{{chemin2}}</a>
+            <a href="" class="btn btn-default" ng-if="chemin3">{{chemin3}}</a>
+        </div>
+    </header>
 
-		    <a href="" class="btn btn-default" ng-if="chemin3">{{chemin3}}</a>
-		</div>
-	</header>
-
-<!-- 	ui-view ask for a child state of menuWeb (defined in controllerMenuWeb) and go directly in MainMenu (because url="") -->	
-	<div ui-view></div>
+    <!-- 	ui-view ask for a child state of menuWeb (defined in controllerMenuWeb) and go directly in MainMenu (because url="") -->
+    <div ui-view></div>
 </body>
-</html> 
+
+</html>

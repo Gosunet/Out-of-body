@@ -11,6 +11,25 @@
 .row-centered {
     text-align:center;
 }
+
+ .gray {
+  color: #ffff8d; }
+.gridListdemoBasicUsage .green {
+  background: blue; }
+.gridListdemoBasicUsage .yellow {
+  background: #ffff8d; }
+.gridListdemoBasicUsage .blue {
+  background: #84ffff; }
+.gridListdemoBasicUsage .purple {
+  background: #b388ff; }
+.gridListdemoBasicUsage .red {
+  background: #ff8a80; }
+.gridListdemoBasicUsage md-grid-tile {
+  transition: all 400ms ease-out 50ms; }
+
+.carddemoBasicUsage .card-media {
+  background-color: #999999; }
+
 .btn_config {
     border-radius: 10px;
 	background-color: beige;	
