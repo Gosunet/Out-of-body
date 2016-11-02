@@ -6,16 +6,18 @@ using System;
 
 public class InitSceneHumanoids : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _humanoidRight;
 
-    public GameObject _humanoidRight;
-    public GameObject _humanoidLeft;
+    [SerializeField]
+    private GameObject _humanoidLeft;
 
     // doors counter on the scene.
     [SerializeField]
     private GameObject _text;
 
     private const float _minDistance = 4;
-    private const float _maxDistance = 50; 
+    private const float _maxDistance = 50;
 
     // Value got from the socket
     private int _nbRepetition;
@@ -52,6 +54,7 @@ public class InitSceneHumanoids : MonoBehaviour
     private float[] _differenceModels;
 
     // Variables for results 
+    private string _fileName;
     private bool _next = false;
     private bool _stop = false;
 
@@ -61,7 +64,10 @@ public class InitSceneHumanoids : MonoBehaviour
         // Activate the exercice
         _humanoidLeft.SetActive(true);
         _humanoidRight.SetActive(true);
-        
+
+        // Creation of results file 
+        _fileName = System.DateTime.Now.ToString();
+
         // Initialize the models 
         initModels();
 
@@ -78,16 +84,10 @@ public class InitSceneHumanoids : MonoBehaviour
 
     private void initModels()
     {
-        //GameObject modelRootLeft = _humanoidLeft.transform.FindChild("python").gameObject;
-        //GameObject modelRootRight= _humanoidRight.transform.FindChild("python").gameObject;
-
-
-        //_humanoidLeft.transform.localRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
-        //modelRootLeft.transform.FindChild("hips/spine/chest/clavicle.L/upper_arm.L").transform.localRotation = new Quaternion(20, -180, 140, 0);
-        //modelRootLeft.transform.FindChild("hips/spine/chest/clavicle.R/upper_arm.R").transform.localRotation = new Quaternion(-20, -180, 140, 0);
-        //modelRootRight.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(20, -180.0f, 140.0f, 0.0f);
-        //modelRootRight.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/RightShoulder").transform.localRotation = new Quaternion(-20, -180.0f, 140.0f, 0.0f);
-
+        //_humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(-50, 0, 0, 0.0f);
+        //_humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder").transform.localRotation = new Quaternion(-20, -180.0f, -140.0f, 0.0f);
+        //_humanoidRight.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(20, -180.0f, -140.0f, 0.0f);
+        //_humanoidRight.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder").transform.localRotation = new Quaternion(-20, -180.0f, -140.0f, 0.0f);
     }
 
     private void initParameters()
