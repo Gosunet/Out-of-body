@@ -17,35 +17,55 @@ public class InitSceneDoors : MonoBehaviour
     // reference doors on the scene
     [SerializeField]
     private GameObject _fullDoors;
+
+
+    // La porte est maintenant décomposée selon le mur de droite, de gauche et haut.
+    // Cela permet de les déplacer au lieu de les redimmensionner.
+    [SerializeField]
+    private GameObject _leftWall;
+
+    [SerializeField]
+    private GameObject _rightWall;
+
+    [SerializeField]
+    private GameObject _topWall;
+
     [SerializeField]
     private GameObject _bottomDoors;
+
     [SerializeField]
     private GameObject _topDoors;
-
 
     // doors counter on the scene.
     [SerializeField]
     private GameObject _text;
 
+    // const value of the scene 
+    private const float _maxHeight = 30;
+    private const float _maxWidth = 50;
+
     // Value of initial doors scales
-    private float _initialScaleX;
-    private float _initialScaleY;
+    private float _initialDistX;
+    private float _initialDistY;
 
     // Attribute to know time response of the patient
     private System.DateTime _time;
 
     // management width of the doors
-    private GameObject _piece;
-    private int _nbDoors = 0;
-    private List<Measure> _scales = new List<Measure>();
+    private int _nbTest;
+    private int _nbRepeat;
+
+    private List<Measure> _listResultDistance = new List<Measure>();
+
+    private List<Distance> _listRandomDistance = new List<Distance>();
+    private List<float> _listHeight = new List<float>();
+    private List<float> _listWidth = new List<float>();
+
+
     private int _doorIndex;     // Index used in scales list
-    private Vector3 _currentScale;  // Scale of the current door in the scene
 
     // Number of doors played (visible on the scene)
     private int _nbAnswers = 0;
-
-    // values of played doors (used for the results file)
-    private List<Measure> _ordreOuverture = new List<Measure>();
 
     // Chosen model by the patient
     private float[] _modelSrcValues;
@@ -70,32 +90,25 @@ public class InitSceneDoors : MonoBehaviour
     {
         string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
 
-        // -- test : J'active toutes les portes pour savoir ce qu'elles font
-        //_bottomDoors.SetActive(true);
-        //_topDoors.SetActive(true);
-        //_fullDoors.SetActive(true);
-
         if (doors.Equals(Utils.BOTTOM_DOORS))
         {
             _bottomDoors.SetActive(true);
-            _piece = _bottomDoors;
             _doorType = FilesConst.BOTTOM_DOOR;
         }
         else if (doors.Equals(Utils.TOP_DOORS))
         {
             _topDoors.SetActive(true);
-            _piece = _topDoors;
             _doorType = FilesConst.TOP_DOOR;
         }
         else
         {
             _fullDoors.SetActive(true);
-            _piece = _fullDoors;
+            _rightWall.SetActive(true);
+            _leftWall.SetActive(true);
+            _topWall.SetActive(true);
+
             _doorType = FilesConst.FULL_DOOR;
         }
-        _currentScale = _piece.transform.localScale;
-        _initialScaleX = _currentScale.x;
-        _initialScaleY = _currentScale.y;
 
         // creation results file
         _fileName = System.DateTime.Now.ToString();
@@ -103,64 +116,45 @@ public class InitSceneDoors : MonoBehaviour
         _fileName = _fileName.Replace(":", "-");
 
         // Init. array of doors scales.
-        initScales();
+        initListDistance();
 
+        // Load XML from assets
         loadXMLFromAssest();
 
-        // Get name of the current model
-        string[] modelName = PlayerPrefs.GetString(Utils.PREFS_MODEL).Split(';');
-        if (!modelName[0].Equals(""))
-        {
-            _modelSrcValues = ReadModelsValue(modelName[0].Split('/')[2]);  //Patient model save at the index 0 of the "modelName" array
-            _modelDstValues = ReadModelsValue(modelName[1].Split('/')[2]);  //Psychologue model save at the index 0 of the "modelName" array
-            _differenceModels = calculEcart(_modelSrcValues, _modelDstValues);
-        }
+        // Init the model
+        initModel();
 
-        // Update doors scales.
-        _doorIndex = Random.Range(0, _scales.Count);
-        applyScale();
+        // Apply the first distance 
+        applyDistance();
 
-        _stop = false;
-        // Write  
-        _nbAnswers++;
-        _text.GetComponent<Text>().text = _nbAnswers.ToString() + "/" + _nbDoors.ToString();
+        _stop = false;      
     }
+
 
     void Update()
     {
         if (!_stop)
         {
             if (Input.GetKeyDown(KeyCode.O) || Input.GetMouseButtonDown(0))
-            {
+            {                
                 Reponse(true);
                 _next = true;
             }
             else if (Input.GetKeyDown(KeyCode.N) || Input.GetMouseButtonDown(1))
-            {
+            {              
                 Reponse(false);
                 _next = true;
             }
-            _ordreOuverture[_ordreOuverture.Count - 1].time = (System.DateTime.Now - _time).TotalMilliseconds;
+
             if (_next)
             {
-                if (_scales.Count > 0)
-                {
-                    int nbTry = 0;
-                    do
-                    {
-                        //Random.
-                        _doorIndex = Random.Range(0, (_scales.Count));
-                        nbTry++;
-                        if (nbTry > 10)
-                        {
-                            break;
-                        }
-                    } while (_currentScale.x == _scales[_doorIndex].width && _currentScale.y == _scales[_doorIndex].height);
+                // Ajout de la mesure de temps dans la liste
+                _listResultDistance[_listResultDistance.Count - 1].time = (System.DateTime.Now - _time).TotalMilliseconds;
 
-                    applyScale();
+                if (_listRandomDistance.Count > 0)
+                {
+                    applyDistance();
                     _next = false;
-                    _nbAnswers++;
-                    _text.GetComponent<Text>().text = _nbAnswers.ToString() + "/" + _nbDoors.ToString();
                 }
                 else
                 {
@@ -179,124 +173,168 @@ public class InitSceneDoors : MonoBehaviour
                     SocketClient.GetInstance().Write(Utils.SOCKET_END_DOOR);  // Send message "doors end" to the server
 
                     Utils.CurrentState = State.WAITING;
-                    
-                    //SceneManager.LoadScene(Utils.MAIN_SCENE);
-                    //Application.LoadLevel(Utils.WAITING_SCENE);
-                    
                 }
             }
         }
     }
 
-    /// <summary>
-    /// Initialisation of the array who contains doors scales.
-    /// </summary>
-    void initScales()
+    private void initModel()
     {
-        List<Measure> measures = new List<Measure>();
+        // Get name of the current model
+        string[] modelName = PlayerPrefs.GetString(Utils.PREFS_MODEL).Split(';');
+        if (!modelName[0].Equals(""))
+        {
+            _modelSrcValues = ReadModelsValue(modelName[0].Split('/')[2]);  //Patient model save at the index 0 of the "modelName" array
+            _modelDstValues = ReadModelsValue(modelName[1].Split('/')[2]);  //Psychologue model save at the index 0 of the "modelName" array
+            _differenceModels = calculEcart(_modelSrcValues, _modelDstValues);
+        }
 
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    private void initListDistance()
+    {
         string resSocket = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
-
         string[] parameters = resSocket.Split('_');
 
-        int nbTries = int.Parse(parameters[0]);
+        Debug.Log(resSocket);
+
+        _nbRepeat = int.Parse(parameters[0]);
 
         int nbWidth = int.Parse(parameters[1]);
-        int nbHeight;
-        if (_doorType != FilesConst.FULL_DOOR)
-            nbHeight = 0;
-        else
-            nbHeight = int.Parse(parameters[3]);
+        float minWidth = float.Parse(parameters[2])/10;
+        float maxWidth = float.Parse(parameters[3])/10;
 
+        if (maxWidth > _maxWidth) maxWidth = _maxWidth;
+
+        int nbHeight = 0;
+        if (_doorType == FilesConst.FULL_DOOR) nbHeight = int.Parse(parameters[4]);
+
+        _listHeight = new List<float>();
+        _listWidth = new List<float>();
+
+        // Définition des valeurs possibles en largeur
         if (nbWidth > 0)
         {
-            int widthStep = int.Parse(parameters[2]);
-            int heightStep = int.Parse(parameters[4]);
-            if (nbWidth % 2 != 0)
-            {   // if nbWidth is an odd number
-                for (int i = -nbWidth / 2; i < (nbWidth + 1) / 2; i++)
-                {
-                    if (nbHeight > 0)
-                    {
-                        if (nbHeight % 2 != 0)
-                        {   // if nbHeight is an odd number
-                            for (int j = -nbHeight / 2; j < (nbHeight + 1) / 2; j++)
-                            {
-                                measures.Add(new Measure((float)(widthStep * i / 100.0 + 1.0) * _initialScaleX, (float)(heightStep * j / 100.0 + 1.0) * _initialScaleY));
-                            }
-                        }
-                        else
-                        {   // if nbHeight is an even number
-                            for (int j = -nbHeight / 2; j < nbHeight / 2; j++)
-                            {
-                                measures.Add(new Measure((float)(widthStep * i / 100.0 + 1.0) * _initialScaleX, (float)(heightStep * j / 100.0 + 1.0) * _initialScaleY + heightStep * _initialScaleY / (2 * 100)));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        measures.Add(new Measure((float)(widthStep * i / 100.0 + 1.0) * _initialScaleX, _initialScaleY));
-                    }
-                }
-            }
-            else
-            {   // if nbWidth is an even number
-                for (int i = -nbWidth / 2; i < nbWidth / 2; i++)
-                {
-                    if (nbHeight > 0)
-                    {
-                        if (nbHeight % 2 != 0)
-                        {   // if nbHeight is an odd number
-                            for (int j = -nbHeight / 2; j < (nbHeight + 1) / 2; j++)
-                            {
-                                measures.Add(new Measure((float)(widthStep * i / 100.0 + 1.0) * _initialScaleX + widthStep * _initialScaleX / (2 * 100), (float)(heightStep * j / 100.0 + 1.0) * _initialScaleY));
-                            }
-                        }
-                        else
-                        {   // if nbHeight is an even number
-                            for (int j = -nbHeight / 2; j < nbHeight / 2; j++)
-                            {
-                                measures.Add(new Measure((float)(widthStep * i / 100.0 + 1.0) * _initialScaleX + widthStep * _initialScaleX / (2 * 100), (float)(heightStep * j / 100.0 + 1.0) * _initialScaleY + heightStep * _initialScaleY / (2 * 100)));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        measures.Add(new Measure((float)(widthStep * i / 100.0 + 1.0) * _initialScaleX + widthStep * _initialScaleX / (2 * 100), _initialScaleY));
-                    }
-                }
+            // Définition du pas
+            float step = (float)((maxWidth - minWidth) / nbWidth);
+
+            for (int i = 0; i < nbWidth; i++)
+            {
+                float value = (float)(step * i + minWidth);
+                _listWidth.Add(value);
             }
         }
 
-        for (int i = 0; i < nbTries; i++)
+        // Définition des valeurs possible enn hauteur
+        if (nbHeight > 1)
         {
-            _scales.AddRange(measures);
+            float minHeight = float.Parse(parameters[5])/10;
+            float maxHeight = float.Parse(parameters[6])/10;
+
+            Debug.Log("Min width " + minWidth);
+            Debug.Log(" Max width " + maxWidth);
+
+            if (maxHeight > _maxHeight) maxHeight = _maxHeight;
+
+            // Définition du pas
+            float step = (float)((maxHeight - minHeight) / nbHeight);
+
+            for (int j = 0; j < nbHeight; j++)
+            {
+                float value = (float)(step * j + minHeight);
+                _listHeight.Add(value);
+                Debug.Log("Valeur ajoutée : " + value);
+
+            }
         }
-        _nbDoors = _scales.Count;
+
+        // Egalisation des listes
+        if (nbWidth > nbHeight)
+        {
+            _nbTest = nbWidth;
+            int size = _listHeight.Count;
+
+            // Pour éviter un dépassement de liste
+            for (int i = 0; i <= nbWidth - nbHeight; i++)
+            {
+                _listHeight.Add(_listHeight[i % size]);
+            }
+        }
+        else
+        {
+            _nbTest = nbHeight;
+            int size = _listWidth.Count;
+
+            // Pour éviter un dépassement de liste
+            for (int i = 0; i <= nbHeight - nbWidth; i++)
+            {
+                _listWidth.Add(_listWidth[i % size]);
+            }
+        }
+
+        // initialiser la liste Random
+        initRandomList();
+    }
+
+    private void initRandomList()
+    {
+        List<Distance> listDistance = new List<Distance>();
+
+        // Géneration de liste de distance aléatoires 
+        for (int i = 0; i < _nbTest; i++)
+        {
+            // Récupération de deux valeurs aléatoires dans la liste
+            int indexRandomWidth = Random.Range(0, _listWidth.Count);
+            int indexRandomHeight = Random.Range(0, _listHeight.Count);
+
+            // Ajout du couple de valeurs (pour s'assurer que l'on aura 
+            listDistance.Add(new Distance(_listWidth[indexRandomWidth], _listHeight[indexRandomHeight]));
+
+            _listWidth.RemoveAt(indexRandomWidth);
+            _listHeight.RemoveAt(indexRandomHeight);
+        }
+
+        // Création de la liste de répétition 
+        for (int i = 0; i < _nbRepeat; i++)
+        {
+            _listRandomDistance.AddRange(listDistance);
+        }
+
+        _nbTest = _listRandomDistance.Count;
 
     }
 
-    void initDistance()
+    private void applyDistance()
     {
-        string resSocket = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
-        string[] parameters = resSocket.Split('_');
+        _doorIndex = Random.Range(0, _listRandomDistance.Count);
+        Distance newDistance = _listRandomDistance[_doorIndex];
 
-        int nbTries = int.Parse(parameters[0]);
+        float newPosX = (float)(newDistance.width / 2.0);
+        float newPosY = (float)(newDistance.height);
+
+        // Positionnement des murs
+        _leftWall.transform.localPosition = new Vector3(-newPosX, _leftWall.transform.localPosition.y, _leftWall.transform.localPosition.z);
+        _rightWall.transform.localPosition = new Vector3(newPosX, _rightWall.transform.localPosition.y, _rightWall.transform.localPosition.z);
+        _topWall.transform.localPosition = new Vector3(_topWall.transform.localPosition.x, newPosY, _topWall.transform.localPosition.z);
+
+        Debug.Log("Distance appliquée : " + newDistance.width + " - " + newDistance.height);
+
+        _listRandomDistance.RemoveAt(_doorIndex);
+        _nbAnswers++;
+
+        _text.GetComponent<Text>().text = _nbAnswers.ToString() + "/" + _nbTest.ToString();
 
 
-
-    }
-    /// <summary>
-    /// Update scale of the door whith the value _widthIndex
-    /// </summary>
-    void applyScale()
-    {
-        _currentScale.x = _scales[_doorIndex].width;
-        _currentScale.y = _scales[_doorIndex].height;
-        _ordreOuverture.Add(_scales[_doorIndex]);
-        _scales.RemoveAt(_doorIndex);
-        _piece.transform.localScale = _currentScale;
         _time = System.DateTime.Now;
+
+        // Ajout des dimensions dans la liste - le temps va être ajouté lors de la réponse de l'utilisateur.
+        _listResultDistance.Add(new Measure(newDistance.width, newDistance.height, 0));
+        // Pour éviter d'enregistrer la premiere mesure à l'initialisation. 
+       
+
+        //_time = System.DateTime.Now
     }
 
     /// <summary>
@@ -352,9 +390,11 @@ public class InitSceneDoors : MonoBehaviour
             file = new StreamWriter(filename, true);
         }
         int condition = PlayerPrefs.GetInt(Utils.PREFS_CONDITION);
-        for (int nbDoor = 0; nbDoor < _ordreOuverture.Count; nbDoor++)
+
+        // TODO _____________ attention à ordre ouverture !
+        for (int nbDoor = 0; nbDoor < _listResultDistance.Count; nbDoor++)
         {
-            file.WriteLine((nbDoor + 1).ToString() + SEPARATOR + condition.ToString() + SEPARATOR + _doorType.ToString() + SEPARATOR + _ordreOuverture[nbDoor].width.ToString() + SEPARATOR + _ordreOuverture[nbDoor].height.ToString() + SEPARATOR + (_answers[nbDoor] == true ? "1" : "0") + SEPARATOR + modelSrcvalue + SEPARATOR + modelDstvalue + SEPARATOR + modelDiffvalue + SEPARATOR + _ordreOuverture[nbDoor].time.ToString());
+           file.WriteLine((nbDoor + 1).ToString() + SEPARATOR + condition.ToString() + SEPARATOR + _doorType.ToString() + SEPARATOR + _listResultDistance[nbDoor].width.ToString() + SEPARATOR + _listResultDistance[nbDoor].height.ToString() + SEPARATOR + (_answers[nbDoor] == true ? "1" : "0") + SEPARATOR + modelSrcvalue + SEPARATOR + modelDstvalue + SEPARATOR + modelDiffvalue + SEPARATOR + _listResultDistance[nbDoor].time.ToString());
         }
         file.Close();
     }
@@ -410,7 +450,7 @@ public class InitSceneDoors : MonoBehaviour
         {
             if (_answers[i])
             {
-                moyenne += _ordreOuverture[i].width;
+                moyenne += _listResultDistance[i].width;
                 nbOui++;
             }
         }
@@ -567,65 +607,18 @@ public class InitSceneDoors : MonoBehaviour
         return resultat;
     }
 
-    public GameObject text
-    {
-        get
-        {
-            return _text;
-        }
-        set
-        {
-            _text = value;
-        }
-    }
 
-    public GameObject fullDoors
-    {
-        get
-        {
-            return _fullDoors;
-        }
-        set
-        {
-            _fullDoors = value;
-        }
-    }
-
-    public GameObject bottomDoors
-    {
-        get
-        {
-            return _bottomDoors;
-        }
-        set
-        {
-            _bottomDoors = value;
-        }
-    }
-
-    public GameObject topDoors
-    {
-        get
-        {
-            return _topDoors;
-        }
-        set
-        {
-            _topDoors = value;
-        }
-    }
-
-    private class Measure
+    public class Measure
     {
         private float _width;
         private float _height;
         private double _time;
 
-        public Measure(float width, float height)
+        public Measure(float width, float height, double time)
         {
             _width = width;
             _height = height;
-            _time = 0;
+            _time = time;
         }
 
 
@@ -665,4 +658,44 @@ public class InitSceneDoors : MonoBehaviour
             }
         }
     }
+
+
+
+    public class Distance
+    {
+        public Distance(float width, float height)
+        {
+            _width = width;
+            _height = height;
+        }
+
+        private float _width;
+        private float _height;
+        public float width
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                _width = value;
+            }
+        }
+
+        public float height
+        {
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                _height = value;
+            }
+        }
+
+    }
+
+
 }
