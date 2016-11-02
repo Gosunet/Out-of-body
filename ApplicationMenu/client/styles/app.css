@@ -11,6 +11,10 @@
 .row-centered {
     text-align:center;
 }
+
+.carddemoBasicUsage .card-media {
+  background-color: #999999; }
+
 .btn_config {
     border-radius: 10px;
 	background-color: beige;	
