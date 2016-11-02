@@ -1,4 +1,4 @@
-var modules = ['ui.router', 'ngStorage', 'ngMaterial'];
+var modules = ['ui.router', 'ngStorage'];
 var menu = angular.module('menu', modules);
 
 menu.controller('menuWebCtrl', function ($scope, $state, $rootScope, $http) {
