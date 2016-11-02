@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
+using ManageLog;
 
 /// <summary>
 /// Script launched when the user has to select an avatar
@@ -199,17 +200,22 @@ public class SelectModel : MonoBehaviour
         Debug.Log("VALIDATE");
         if (src != null && dst != null)
         {
-            CreateNewDirectory();
+            //CreateNewDirectory();
             string models = Utils.MODELS_DIRECTORY[_gender] + src.name + ";" + Utils.MODELS_DIRECTORY[_gender] + dst.name;
             PlayerPrefs.SetString(Utils.PREFS_MODEL, models);
             Debug.Log(models);
             PlayerPrefs.SetInt(Utils.PREFS_CONDITION, 1);
+
+            //Creation du fichier de log pour les données de l'avatar sélectionné
+            FileLog fl = new FileLog();
+            fl.createAvatarLogFile(difference, _go_models, _avatarIndex);
+
             Utils.CurrentState = State.WAITING;
             //Application.LoadLevel(Utils.WAITING_SCENE);
         }
     }
 
-    /// <summary>
+   /* /// <summary>
     /// Create the directory which will contains the user's files
     /// </summary>
     void CreateNewDirectory()
@@ -227,7 +233,7 @@ public class SelectModel : MonoBehaviour
         }
         string time = System.DateTime.Now.ToString().Replace("/", "-").Replace(":", "-");
         PlayerPrefs.SetString(Utils.PREFS_PATH_FOLDER, Directory.CreateDirectory(FilesConst.SAVE_FILES_DIRECTORY + "/" + FilesConst.USER_PREFIX_DIRECTORY + (dirIndex + 1).ToString() + "_" + time).FullName);
-    }
+    }*/
 
     /// <summary>
     /// Selects the experimentator's avatar, taking care with the difference between the two models

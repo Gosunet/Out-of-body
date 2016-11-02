@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Globalization;
 using UnityEngine.SceneManagement;
+using ManageLog;
 
 /// <summary>
 /// Script called when the door scene is starting.
@@ -63,7 +64,7 @@ public class InitSceneDoors : MonoBehaviour
     private bool _stop;
 
     private int _doorType;
-
+    private int _numeroExercice;
     string SEPARATOR = "\t";
 
     void Start()
@@ -108,13 +109,13 @@ public class InitSceneDoors : MonoBehaviour
         loadXMLFromAssest();
 
         // Get name of the current model
-        string[] modelName = PlayerPrefs.GetString(Utils.PREFS_MODEL).Split(';');
+        /*string[] modelName = PlayerPrefs.GetString(Utils.PREFS_MODEL).Split(';');
         if (!modelName[0].Equals(""))
         {
             _modelSrcValues = ReadModelsValue(modelName[0].Split('/')[2]);  //Patient model save at the index 0 of the "modelName" array
             _modelDstValues = ReadModelsValue(modelName[1].Split('/')[2]);  //Psychologue model save at the index 0 of the "modelName" array
             _differenceModels = calculEcart(_modelSrcValues, _modelDstValues);
-        }
+        }*/
 
         // Update doors scales.
         _doorIndex = Random.Range(0, _scales.Count);
@@ -171,8 +172,13 @@ public class InitSceneDoors : MonoBehaviour
                     {
                         string username = directory.Remove(0, directory.LastIndexOf('\\') + 1).Split('_')[0];
 
-                        CreateResultFile(directory, username);
-                        createTxT(username);
+                        _numeroExercice = recupNumeroExecice();
+                        FileLog fl = new FileLog();
+                        fl.createConfigFile(_numeroExercice);
+                        fl.createResultFile(directory, username, _numeroExercice, _ordreOuverture, _answers);
+
+                        //CreateResultFile(directory, username);
+                        //createTxT(username);
 
                         CallPythonScript(username, PlayerPrefs.GetInt(Utils.PREFS_CONDITION), Path.Combine(directory, username + ".txt"));
                     }
@@ -314,7 +320,7 @@ public class InitSceneDoors : MonoBehaviour
     /// </summary>
     /// <param name="dir">directory</param>
     /// <param name="username">Name of the patient</param>
-    void CreateResultFile(string dir, string username)
+    /*void CreateResultFile(string dir, string username)
     {
         string modelSrcvalue;
         string modelDstvalue;
@@ -357,13 +363,13 @@ public class InitSceneDoors : MonoBehaviour
             file.WriteLine((nbDoor + 1).ToString() + SEPARATOR + condition.ToString() + SEPARATOR + _doorType.ToString() + SEPARATOR + _ordreOuverture[nbDoor].width.ToString() + SEPARATOR + _ordreOuverture[nbDoor].height.ToString() + SEPARATOR + (_answers[nbDoor] == true ? "1" : "0") + SEPARATOR + modelSrcvalue + SEPARATOR + modelDstvalue + SEPARATOR + modelDiffvalue + SEPARATOR + _ordreOuverture[nbDoor].time.ToString());
         }
         file.Close();
-    }
+    }*/
 
     /// <summary>
     /// Creates the text file.
     /// </summary>
     /// <param name="username">Patient name</param>
-    void createTxT(string username)
+    /*void createTxT(string username)
     {
         string modelSrcvalue;
         string modelDstvalue;
@@ -456,7 +462,7 @@ public class InitSceneDoors : MonoBehaviour
             lines[lines.Length - 1] = res;
             File.WriteAllLines(fileName, lines);
         }
-    }
+    }*/
 
     /// <summary>
     /// Call python script
@@ -484,15 +490,15 @@ public class InitSceneDoors : MonoBehaviour
     /// <param name="condition">Condition.</param>
     /// <param name="moyenne">Moyenne.</param>
     /// <param name="parameters">Parameters.</param>
-    string WriteOrUpdateMoyenne(int condition, float moyenne, string[] parameters)
+    /*string WriteOrUpdateMoyenne(int condition, float moyenne, string[] parameters)
     {
         return WriteOrUpdateParameter(condition, parameters, moyenne, 10);
-    }
+    }*/
 
-    string WriteOrUpdatePSE(int condition, float pse, string[] parameters)
+    /*string WriteOrUpdatePSE(int condition, float pse, string[] parameters)
     {
         return WriteOrUpdateParameter(condition, parameters, pse, 14);
-    }
+    }*/
 
     /// <summary>
     /// Prepare or update string who's write on the result file.
@@ -502,7 +508,7 @@ public class InitSceneDoors : MonoBehaviour
     /// <param name="parameters">Parameters.</param>
     /// <param name="newValue">New value.</param>
     /// <param name="baseIndex">Base index.</param>
-    string WriteOrUpdateParameter(int condition, string[] parameters, float newValue, int baseIndex)
+    /*string WriteOrUpdateParameter(int condition, string[] parameters, float newValue, int baseIndex)
     {
         string res = "";
         for (int i = 1; i < 5; i++)
@@ -513,7 +519,7 @@ public class InitSceneDoors : MonoBehaviour
                 res += parameters[baseIndex + i] + SEPARATOR;
         }
         return res;
-    }
+    }*/
 
     /// <summary>
     /// Add response into the array of _answers.
@@ -526,11 +532,21 @@ public class InitSceneDoors : MonoBehaviour
     }
 
     /// <summary>
+    /// recup le numero d'exercice + l'incrémente pour le suivant.
+    /// </summary>
+    int recupNumeroExecice()
+    {
+        int n = PlayerPrefs.GetInt(Utils.PREFS_NUMERO_EXERCICE);
+        PlayerPrefs.SetInt(Utils.PREFS_NUMERO_EXERCICE, n + 1);
+        return n;
+    }
+
+    /// <summary>
     /// Reads the models value on the xml.
     /// </summary>
     /// <returns>The models value.</returns>
     /// <param name="name">Name.</param>
-    float[] ReadModelsValue(string name)
+    /*float[] ReadModelsValue(string name)
     {
         string nameNode = "", waist = "", hips = "", chest = "";
         foreach (XmlElement node in _xmlModel.SelectNodes("Models/Model"))
@@ -551,7 +567,7 @@ public class InitSceneDoors : MonoBehaviour
         values[1] = float.Parse(chest);
         values[2] = float.Parse(hips);
         return values;
-    }
+    }*/
 
     /// <summary>
     /// calculate the difference bewteen patient and psycholog model.
@@ -559,13 +575,13 @@ public class InitSceneDoors : MonoBehaviour
     /// <returns>The ecart.</returns>
     /// <param name="src">Source.</param>
     /// <param name="dst">Dst.</param>
-    float[] calculEcart(float[] src, float[] dst)
+    /*float[] calculEcart(float[] src, float[] dst)
     {
         float[] resultat = new float[3];
         for (int i = 0; i < resultat.Length; i++)
             resultat[i] = (dst[i] - src[i]) / src[i] * 100;
         return resultat;
-    }
+    }*/
 
     public GameObject text
     {
@@ -615,7 +631,7 @@ public class InitSceneDoors : MonoBehaviour
         }
     }
 
-    private class Measure
+    /*private class Measure
     {
         private float _width;
         private float _height;
@@ -664,5 +680,5 @@ public class InitSceneDoors : MonoBehaviour
                 _time = ((int)value) / 1000.0;
             }
         }
-    }
+    }*/
 }

@@ -3,8 +3,11 @@ public static class FilesConst {
 	public readonly static string USER_PREFIX_DIRECTORY = "Participant";
 	public readonly static string FILE_EXTENSION = ".xml";
 	public readonly static string FILENAME_RESULT_TXT = "Resultat.txt";
+    public readonly static string FILENAME_LOG_AVATAR_SELECT = "Selection_avatar.txt";
+    public readonly static string FILENAME_RESULT_EXERCICE = "Resultat_exercice";
+    public readonly static string FILENAME_CONFIG_EXERCICE = "Parametres_exercice";
 
-	public readonly static string ROOT_NODE = "Ouvertures";
+    public readonly static string ROOT_NODE = "Ouvertures";
 	public readonly static string OPENING_NODE = "Ouverture";
 	public readonly static string WIDTH_NODE = "Longueur";
 	public readonly static string HEIGHT_NODE = "Hauteur";
