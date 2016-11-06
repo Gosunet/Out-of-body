@@ -69,7 +69,7 @@ public class InitSceneHumanoids : MonoBehaviour
         initParameters();
 
         // Initialize the range of distance
-        intitDistances();
+        initDistances();
 
         // Apply the distance scale 
         applyScaleDistance();
@@ -108,7 +108,7 @@ public class InitSceneHumanoids : MonoBehaviour
 
     }
 
-    private void intitDistances()
+    private void initDistances()
     {
         System.Random rnd = new System.Random();
 
