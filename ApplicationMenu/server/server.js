@@ -44,6 +44,9 @@ var server = net.createServer(function (socket) {
         if (data.toString() === "door_finish") {
             door_finish = true;
         }
+        if (data.toString() === "humanoid_finish") {
+            door_finish = true;
+        }
     });
 
     process.on('uncaughtException', function (err) {});
@@ -55,6 +58,7 @@ var server = net.createServer(function (socket) {
     getAndSendWithoutParams('F_avatar');
 
     requestDoorsFinish();
+    requestHumanoidesFinish();
 
     getAndSendWithParams('e');
     getAndSendWithParams('db');
@@ -70,6 +74,18 @@ function requestDoorsFinish() {
     app.get('/porte', function (req, res) {
         if (door_finish == true) {
             door_finish = false;
+            res.end();
+        } else {
+            res.sendStatus(403);
+        }
+    });
+}
+
+function requestHumanoidesFinish()
+{
+    app.get('/humanoide', function (req, res) {
+        if (humanoid_finish == true) {
+            humanoid_finish = false;
             res.end();
         } else {
             res.sendStatus(403);
