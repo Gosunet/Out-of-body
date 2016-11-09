@@ -14,25 +14,18 @@ using UnityEngine.SceneManagement;
 public class InitSceneDoors : MonoBehaviour
 {
 
-    // reference doors on the scene
+    // PORTE ENTIERE
     [SerializeField]
     private GameObject _fullDoors;
-
-
-    // La porte est maintenant décomposée selon le mur de droite, de gauche et haut.
-    // Cela permet de les déplacer au lieu de les redimmensionner.
-    [SerializeField]
-    private GameObject _leftWall;
-
-    [SerializeField]
-    private GameObject _rightWall;
 
     [SerializeField]
     private GameObject _topWall;
 
+    // PORTE BAS
     [SerializeField]
     private GameObject _bottomDoors;
 
+    // PORTE HAUT
     [SerializeField]
     private GameObject _topDoors;
 
@@ -43,6 +36,7 @@ public class InitSceneDoors : MonoBehaviour
     // const value of the scene 
     private const float _maxHeight = 30;
     private const float _maxWidth = 50;
+    private const float _standardHeight = 15;
 
     // Value of initial doors scales
     private float _initialDistX;
@@ -55,14 +49,15 @@ public class InitSceneDoors : MonoBehaviour
     private int _nbTest;
     private int _nbRepeat;
 
+    // liste des mesures réalisées
     private List<Measure> _listResultDistance = new List<Measure>();
 
     private List<Distance> _listRandomDistance = new List<Distance>();
     private List<float> _listHeight = new List<float>();
     private List<float> _listWidth = new List<float>();
 
-
-    private int _doorIndex;     // Index used in scales list
+    // Index used in scales list
+    private int _doorIndex;     
 
     // Number of doors played (visible on the scene)
     private int _nbAnswers = 0;
@@ -84,31 +79,93 @@ public class InitSceneDoors : MonoBehaviour
 
     private int _doorType;
 
+    private int initialOffset = 0;
+    private GameObject LeftWall
+    {
+        get
+        {
+            if (_doorType == FilesConst.FULL_DOOR)
+            {
+                initialOffset = 0;
+                return (GameObject)_fullDoors.transform.FindChild("MurGauche").gameObject;
+            }
+            else if (_doorType == FilesConst.BOTTOM_DOOR)
+            {
+                initialOffset = 14;
+                return (GameObject)_bottomDoors.transform.FindChild("CubeBottomLeft").gameObject;
+            }
+            else if(_doorType == FilesConst.TOP_DOOR)
+            {
+                initialOffset = 14;
+                return (GameObject)_topDoors.transform.FindChild("CubeTopLeft").gameObject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+    }
+
+    private GameObject RightWall
+    {
+        get
+        {
+            if (_doorType == FilesConst.FULL_DOOR)
+            {
+                return (GameObject)_fullDoors.transform.FindChild("MurDroit").gameObject;
+            }
+            else if (_doorType == FilesConst.BOTTOM_DOOR)
+            {
+                return (GameObject)_bottomDoors.transform.FindChild("CubeBottomRight").gameObject;
+            }
+            else if (_doorType == FilesConst.TOP_DOOR)
+            {
+                return (GameObject)_topDoors.transform.FindChild("CubeTopRight").gameObject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+    }
+
+
     string SEPARATOR = "\t";
 
     void Start()
     {
         string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
+        //_topWall.SetActive(false);
 
         if (doors.Equals(Utils.BOTTOM_DOORS))
         {
-            _bottomDoors.SetActive(true);
+            _bottomDoors.SetActive(true);       
+            _topWall.SetActive(false);
+
             _doorType = FilesConst.BOTTOM_DOOR;
         }
         else if (doors.Equals(Utils.TOP_DOORS))
         {
             _topDoors.SetActive(true);
+            _topWall.SetActive(false);
+
             _doorType = FilesConst.TOP_DOOR;
         }
         else
         {
             _fullDoors.SetActive(true);
-            _rightWall.SetActive(true);
-            _leftWall.SetActive(true);
+            //_rightWall.SetActive(true);
+            //_leftWall.SetActive(true);
             _topWall.SetActive(true);
 
             _doorType = FilesConst.FULL_DOOR;
         }
+
+        RightWall.SetActive(true);
+        LeftWall.SetActive(true);
+
 
         // creation results file
         _fileName = System.DateTime.Now.ToString();
@@ -129,7 +186,6 @@ public class InitSceneDoors : MonoBehaviour
 
         _stop = false;      
     }
-
 
     void Update()
     {
@@ -178,6 +234,7 @@ public class InitSceneDoors : MonoBehaviour
         }
     }
 
+    #region Initialisation des listes
     private void initModel()
     {
         // Get name of the current model
@@ -190,16 +247,13 @@ public class InitSceneDoors : MonoBehaviour
         }
 
     }
-    /// <summary>
-    /// 
-    /// </summary>
+   
     private void initListDistance()
-    {
+    {     
         string resSocket = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
         string[] parameters = resSocket.Split('_');
 
-        Debug.Log(resSocket);
-
+        // Récupération des paramètres envoyé via la socket
         _nbRepeat = int.Parse(parameters[0]);
 
         int nbWidth = int.Parse(parameters[1]);
@@ -211,8 +265,8 @@ public class InitSceneDoors : MonoBehaviour
         int nbHeight = 0;
         if (_doorType == FilesConst.FULL_DOOR) nbHeight = int.Parse(parameters[4]);
 
-        _listHeight = new List<float>();
-        _listWidth = new List<float>();
+        // liste des distances 
+        List<Distance> listDistance = new List<Distance>();
 
         // Définition des valeurs possibles en largeur
         if (nbWidth > 0)
@@ -223,89 +277,46 @@ public class InitSceneDoors : MonoBehaviour
             for (int i = 0; i < nbWidth; i++)
             {
                 float value = (float)(step * i + minWidth);
-                _listWidth.Add(value);
+                listDistance.Add(new Distance(value,_standardHeight));
             }
         }
 
-        // Définition des valeurs possible enn hauteur
-        if (nbHeight > 1)
-        {
-            float minHeight = float.Parse(parameters[5])/10;
-            float maxHeight = float.Parse(parameters[6])/10;
+        // La gestion de la liste en hauteur s ion est en FULL DOORS 
+        if(_doorType == FilesConst.FULL_DOOR && nbHeight>1)
+        {    
+                float minHeight = float.Parse(parameters[5]) / 10;
+                float maxHeight = float.Parse(parameters[6]) / 10;
 
-            Debug.Log("Min width " + minWidth);
-            Debug.Log(" Max width " + maxWidth);
+                if (maxHeight > _maxHeight) maxHeight = _maxHeight;
 
-            if (maxHeight > _maxHeight) maxHeight = _maxHeight;
+                // Définition du pas
+                float step = (float)((maxHeight - minHeight) / nbHeight);
 
-            // Définition du pas
-            float step = (float)((maxHeight - minHeight) / nbHeight);
+                List<Distance> listDistanceTmp = new List<Distance>();
+                foreach(var distance in listDistance)
+                {
+                    for (int j = 0; j < nbHeight; j++)
+                    {
+                        float value = (float)(step * j + minHeight);
+                        listDistanceTmp.Add(new Distance(distance.width, value));
+                    }
+                }
 
-            for (int j = 0; j < nbHeight; j++)
-            {
-                float value = (float)(step * j + minHeight);
-                _listHeight.Add(value);
-                Debug.Log("Valeur ajoutée : " + value);
-
-            }
+                listDistance = listDistanceTmp;    
         }
-
-        // Egalisation des listes
-        if (nbWidth > nbHeight)
-        {
-            _nbTest = nbWidth;
-            int size = _listHeight.Count;
-
-            // Pour éviter un dépassement de liste
-            for (int i = 0; i <= nbWidth - nbHeight; i++)
-            {
-                _listHeight.Add(_listHeight[i % size]);
-            }
-        }
-        else
-        {
-            _nbTest = nbHeight;
-            int size = _listWidth.Count;
-
-            // Pour éviter un dépassement de liste
-            for (int i = 0; i <= nbHeight - nbWidth; i++)
-            {
-                _listWidth.Add(_listWidth[i % size]);
-            }
-        }
-
-        // initialiser la liste Random
-        initRandomList();
-    }
-
-    private void initRandomList()
-    {
-        List<Distance> listDistance = new List<Distance>();
-
-        // Géneration de liste de distance aléatoires 
-        for (int i = 0; i < _nbTest; i++)
-        {
-            // Récupération de deux valeurs aléatoires dans la liste
-            int indexRandomWidth = Random.Range(0, _listWidth.Count);
-            int indexRandomHeight = Random.Range(0, _listHeight.Count);
-
-            // Ajout du couple de valeurs (pour s'assurer que l'on aura 
-            listDistance.Add(new Distance(_listWidth[indexRandomWidth], _listHeight[indexRandomHeight]));
-
-            _listWidth.RemoveAt(indexRandomWidth);
-            _listHeight.RemoveAt(indexRandomHeight);
-        }
-
-        // Création de la liste de répétition 
+        
+        // nombre de répétition du test 
         for (int i = 0; i < _nbRepeat; i++)
         {
             _listRandomDistance.AddRange(listDistance);
         }
 
+        // Le nombre de test total qu'il faut faire.
         _nbTest = _listRandomDistance.Count;
-
     }
 
+    #endregion
+    
     private void applyDistance()
     {
         _doorIndex = Random.Range(0, _listRandomDistance.Count);
@@ -314,27 +325,43 @@ public class InitSceneDoors : MonoBehaviour
         float newPosX = (float)(newDistance.width / 2.0);
         float newPosY = (float)(newDistance.height);
 
-        // Positionnement des murs
-        _leftWall.transform.localPosition = new Vector3(-newPosX, _leftWall.transform.localPosition.y, _leftWall.transform.localPosition.z);
-        _rightWall.transform.localPosition = new Vector3(newPosX, _rightWall.transform.localPosition.y, _rightWall.transform.localPosition.z);
-        _topWall.transform.localPosition = new Vector3(_topWall.transform.localPosition.x, newPosY, _topWall.transform.localPosition.z);
+        //if (_doorType == FilesConst.BOTTOM_DOOR)
+        //{
+        //    _cubeBottomLeft.transform.localPosition = new Vector3(-newPosX - 14, _cubeBottomLeft.transform.localPosition.y, _cubeBottomLeft.transform.localPosition.z);
+        //    _cubeBottomRight.transform.localPosition = new Vector3(newPosX + 14, _cubeBottomRight.transform.localPosition.y, _cubeBottomRight.transform.localPosition.z);
+        //}
+        //else if (_doorType == FilesConst.TOP_DOOR)
+        //{ 
+        //    // _____________ ENTOURLOUPE _________________ Le 14 sauvage !! Mais ça marche.
+        //    _cubeTopLeft.transform.localPosition = new Vector3(-newPosX - 14, _cubeTopLeft.transform.localPosition.y, _cubeTopLeft.transform.localPosition.z);
+        //    _cubeTopRight.transform.localPosition = new Vector3(newPosX + 14, _cubeTopRight.transform.localPosition.y, _cubeTopRight.transform.localPosition.z);
+        //}
+        //else
+        //{
+        //     // Positionnement des murs
+        //    _leftWall.transform.localPosition = new Vector3(-newPosX, _leftWall.transform.localPosition.y, _leftWall.transform.localPosition.z);
+        //    _rightWall.transform.localPosition = new Vector3(newPosX, _rightWall.transform.localPosition.y, _rightWall.transform.localPosition.z);
+        //    _topWall.transform.localPosition = new Vector3(_topWall.transform.localPosition.x, newPosY, _topWall.transform.localPosition.z);
+        //    Debug.Log("Nouvelle position Y : " + newPosY.ToString());
+        //}
 
-        Debug.Log("Distance appliquée : " + newDistance.width + " - " + newDistance.height);
+
+        if (_doorType == FilesConst.FULL_DOOR)
+        {
+            _topWall.transform.localPosition = new Vector3(_topWall.transform.localPosition.x, newPosY, _topWall.transform.localPosition.z);
+        }
+        RightWall.transform.localPosition = new Vector3(newPosX + initialOffset, RightWall.transform.localPosition.y, RightWall.transform.localPosition.z);
+        LeftWall.transform.localPosition = new Vector3(-newPosX - initialOffset, LeftWall.transform.localPosition.y, LeftWall.transform.localPosition.z);
 
         _listRandomDistance.RemoveAt(_doorIndex);
         _nbAnswers++;
 
         _text.GetComponent<Text>().text = _nbAnswers.ToString() + "/" + _nbTest.ToString();
 
-
         _time = System.DateTime.Now;
 
-        // Ajout des dimensions dans la liste - le temps va être ajouté lors de la réponse de l'utilisateur.
-        _listResultDistance.Add(new Measure(newDistance.width, newDistance.height, 0));
-        // Pour éviter d'enregistrer la premiere mesure à l'initialisation. 
-       
-
-        //_time = System.DateTime.Now
+        // Le temps est à zéro : il sera récupéré durant l'appui sur la touche par l'utilisateur.
+        _listResultDistance.Add(new Measure(newPosX, newPosY, 0));
     }
 
     /// <summary>
@@ -391,7 +418,6 @@ public class InitSceneDoors : MonoBehaviour
         }
         int condition = PlayerPrefs.GetInt(Utils.PREFS_CONDITION);
 
-        // TODO _____________ attention à ordre ouverture !
         for (int nbDoor = 0; nbDoor < _listResultDistance.Count; nbDoor++)
         {
            file.WriteLine((nbDoor + 1).ToString() + SEPARATOR + condition.ToString() + SEPARATOR + _doorType.ToString() + SEPARATOR + _listResultDistance[nbDoor].width.ToString() + SEPARATOR + _listResultDistance[nbDoor].height.ToString() + SEPARATOR + (_answers[nbDoor] == true ? "1" : "0") + SEPARATOR + modelSrcvalue + SEPARATOR + modelDstvalue + SEPARATOR + modelDiffvalue + SEPARATOR + _listResultDistance[nbDoor].time.ToString());
@@ -607,7 +633,7 @@ public class InitSceneDoors : MonoBehaviour
         return resultat;
     }
 
-
+    #region Definition des classes
     public class Measure
     {
         private float _width;
@@ -696,6 +722,6 @@ public class InitSceneDoors : MonoBehaviour
         }
 
     }
-
+    #endregion
 
 }
