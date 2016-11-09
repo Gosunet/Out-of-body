@@ -1,13 +1,18 @@
 menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootScope, $localStorage) {
+    console.log($state.current.name);
     $rootScope.chemin = 'Accueil';
     $rootScope.chemin1 = 'Exercice des humanoïdes';
-    $rootScope.stateChemin1 = $state.current.name;
-    $rootScope.chemin2 = '';
+    $rootScope.stateChemin1 = 'humanoides';
+    if($state.current.name == 'humanoides')
+		$rootScope.chemin2 = 'Humanoides';
+	else $rootScope.chemin2 = 'Batons';
+    $rootScope.stateChemin2 = $state.current.name;
+    $rootScope.chemin3 = '';
     $rootScope.suivant = true;
 
     // Previous function : go back to menu
     $scope.previous = function () {
-        $state.go('mainMenu');
+        $state.go('humanoidesConfig');
     };
 
     // Initialistion of numbers : load last values or default values
@@ -24,7 +29,12 @@ menu.controller('HumanoidesConfigCtrl', function ($scope, $state, $http, $rootSc
     // Function to send values to server AND go to running exercice state
 	var sendMessage = function () {
 		var type ="hu";
-		var message = type + '/' + $scope.nbRepet + '_' + $scope.nbIntervalle + '_' + $scope.intervalleMin + '_' + $scope.intervalleMax;
+        var type2 = ""
+        if($state.current.name == "humanoides")
+			type2 ="hu";
+		else
+			type2 = "ba";
+		var message = type + '/' + $scope.nbRepet + '_' + $scope.nbIntervalle + '_' + $scope.intervalleMin + '_' + $scope.intervalleMax + '_' + type2;
 		$http.get(message);
 		$state.go('runHumanoide');
 	};
