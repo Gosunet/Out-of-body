@@ -17,7 +17,8 @@ public static class FilesConst {
 	public readonly static int FULL_DOOR = 1;
 	public readonly static int BOTTOM_DOOR = 2;
 	public readonly static int TOP_DOOR = 3;
-	
-	public readonly static string ANSWER_YES = "Oui";
+    public readonly static int HUMANOIDE = 4;
+
+    public readonly static string ANSWER_YES = "Oui";
 	public readonly static string ANSWER_NO = "Non";
 }

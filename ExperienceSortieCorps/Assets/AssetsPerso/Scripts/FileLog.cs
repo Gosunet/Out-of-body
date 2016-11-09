@@ -163,6 +163,7 @@ namespace ManageLog
 
             if (doors.Equals(Utils.BOTTOM_DOORS)) doorType = FilesConst.BOTTOM_DOOR;
             else if (doors.Equals(Utils.TOP_DOORS)) doorType = FilesConst.TOP_DOOR;
+            else if (doors.Equals(Utils.PREFS_PARAM_HUMANOID)) doorType = FilesConst.HUMANOIDE;
             else doorType = FilesConst.FULL_DOOR;
 
 
@@ -182,7 +183,83 @@ namespace ManageLog
             }
             file.Close();
         }
+        
+        /// <summary>
+        /// Creates the experimentation result file HUMANOIDE.
+        /// </summary>
+        /// <param name="dir">directory</param>
+        /// <param name="username">Name of the patient</param>
+        /// <param name="numEx">Number exercice</param>
+        /// <param name="ordreOuverture">doors values</param>
+        /// <param name="answers">answers patient</param>
+        public void createResultFileHumanoide(string dir, string username, int numEx, List<float> distance, List<double> time, List<bool> answers)
+        {
+            string modelSrcvalue;
+            string modelDstvalue;
+            string modelDiffvalue;
 
+            if (_modelSrcValues != null)
+            {
+                modelSrcvalue = _modelSrcValues[0].ToString() + SEPARATOR + _modelSrcValues[1].ToString() + SEPARATOR + _modelSrcValues[2].ToString();
+                modelDstvalue = _modelDstValues[0].ToString() + SEPARATOR + _modelDstValues[1].ToString() + SEPARATOR + _modelDstValues[2].ToString();
+                modelDiffvalue = _differenceModels[0].ToString() + SEPARATOR + _differenceModels[1].ToString() + SEPARATOR + _differenceModels[2].ToString();
+            }
+            else
+            {
+                modelSrcvalue = "0" + SEPARATOR + "0" + SEPARATOR + "0";
+                modelDstvalue = "0" + SEPARATOR + "0" + SEPARATOR + "0";
+                modelDiffvalue = "0" + SEPARATOR + "0" + SEPARATOR + "0";
+            }
+
+            string filename = Path.Combine(dir, username + ".txt");
+            StreamWriter file = null;
+
+            if (!File.Exists(filename))
+            {
+                file = new StreamWriter(filename, true);
+                file.WriteLine("N° Exercice" + SEPARATOR +
+                                "N° Porte" + SEPARATOR +
+                                "Condition" + SEPARATOR +
+                                "Type de porte" + SEPARATOR +
+                                "Largeur de porte" + SEPARATOR +
+                                "Hauteur de porte" + SEPARATOR +
+                                "Reponse" + SEPARATOR +
+                                "Corpulence utilisateur" + SEPARATOR + SEPARATOR + SEPARATOR +
+                                "Corpulence docteur" + SEPARATOR + SEPARATOR + SEPARATOR +
+                                "Difference de corpulence" + SEPARATOR + SEPARATOR + SEPARATOR +
+                                "Temps de reponse");
+            }
+            else
+            {
+                file = new StreamWriter(filename, true);
+            }
+
+            int condition = PlayerPrefs.GetInt(Utils.PREFS_CONDITION);
+            string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
+            int doorType;
+
+            if (doors.Equals(Utils.BOTTOM_DOORS)) doorType = FilesConst.BOTTOM_DOOR;
+            else if (doors.Equals(Utils.TOP_DOORS)) doorType = FilesConst.TOP_DOOR;
+            else if (doors.Equals(Utils.PREFS_PARAM_HUMANOID)) doorType = FilesConst.HUMANOIDE;
+            else doorType = FilesConst.FULL_DOOR;
+
+
+            for (int nbDoor = 0; nbDoor < distance.Count; nbDoor++)
+            {
+                file.WriteLine(numEx + SEPARATOR +
+                                (nbDoor + 1).ToString() + SEPARATOR +
+                                condition.ToString() + SEPARATOR +
+                                doorType.ToString() + SEPARATOR +
+                                distance[nbDoor].ToString() + SEPARATOR +
+                                distance[nbDoor].ToString() + SEPARATOR +
+                                (answers[nbDoor] == true ? "1" : "0") + SEPARATOR +
+                                modelSrcvalue + SEPARATOR +
+                                modelDstvalue + SEPARATOR +
+                                modelDiffvalue + SEPARATOR +
+                                time[nbDoor].ToString());
+            }
+            file.Close();
+        }
 
         /// <summary>
         /// Creates the experimentation result file.
@@ -193,21 +270,49 @@ namespace ManageLog
             string filename = Path.Combine(PlayerPrefs.GetString(Utils.PREFS_EXPERIMENT_PATH_FOLDER), FilesConst.FILENAME_CONFIG_EXERCICE + ".txt");
             string config = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
 
-            string[] parameters = config.Split('_');
-            string nb_largeur = parameters[1];
-            string min_largeur = parameters[2];
-            string max_largeur = parameters[3];
-            string nb_hauteur = parameters[4];
-            string min_hauteur = parameters[5];
-            string max_hauteur = parameters[6];
-            string nb_repetition = parameters[0];
-
             string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
             int doorType;
 
             if (doors.Equals(Utils.BOTTOM_DOORS)) doorType = FilesConst.BOTTOM_DOOR;
             else if (doors.Equals(Utils.TOP_DOORS)) doorType = FilesConst.TOP_DOOR;
+            else if (doors.Equals(Utils.PREFS_PARAM_HUMANOID)) doorType = FilesConst.HUMANOIDE;
             else doorType = FilesConst.FULL_DOOR;
+
+
+            //string[] parameters = config.Split('_');
+            string nb_largeur;
+            string min_largeur;
+            string max_largeur;
+            string nb_hauteur;
+            string min_hauteur;
+            string max_hauteur;
+            string nb_repetition;
+            string type;
+
+            if (doors.Equals(Utils.PREFS_PARAM_HUMANOID))
+            {
+                string[] parameters = config.Split('_');
+                nb_largeur = parameters[1];
+                min_largeur = parameters[2];
+                max_largeur = parameters[3];
+                nb_hauteur = "";
+                min_hauteur ="";
+                max_hauteur = "";
+                nb_repetition = parameters[0];
+                type = parameters[4];
+            }
+            else
+            {
+                string[] parameters = config.Split('_');
+                nb_largeur = parameters[1];
+                 min_largeur = parameters[2];
+                 max_largeur = parameters[3];
+                 nb_hauteur = parameters[4];
+                 min_hauteur = parameters[5];
+                 max_hauteur = parameters[6];
+                 nb_repetition = parameters[0];
+                type = "";
+            }
 
             StreamWriter file = null;
 
@@ -218,10 +323,12 @@ namespace ManageLog
                                 "Type exercice" + SEPARATOR +
                                 "Nb largeur" + SEPARATOR +
                                 "Min largeur" + SEPARATOR +
+                                "Max largeur" + SEPARATOR +
                                 "Nb hauteur" + SEPARATOR +
                                 "Min hauteur" + SEPARATOR +
                                 "Max hauteur" + SEPARATOR +
-                                "Nb repetition"
+                                "Nb repetition" + SEPARATOR +
+                                "Type HU ou BA"
                                 );
             }
             else
@@ -237,7 +344,8 @@ namespace ManageLog
                             nb_hauteur + SEPARATOR +
                             min_hauteur + SEPARATOR +
                             max_hauteur + SEPARATOR +
-                            nb_repetition);
+                            nb_repetition + SEPARATOR +
+                            type);
 
             file.Close();
 
@@ -340,11 +448,11 @@ namespace ManageLog
         private float _height;
         private double _time;
 
-        public Measure(float width, float height)
+        public Measure(float width, float height, double time)
         {
             _width = width;
             _height = height;
-            _time = 0;
+            _time = time;
         }
 
 
