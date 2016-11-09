@@ -81,10 +81,8 @@ public class InitSceneHumanoids : MonoBehaviour
         //GameObject modelRootLeft = _humanoidLeft.transform.FindChild("python").gameObject;
         //GameObject modelRootRight= _humanoidRight.transform.FindChild("python").gameObject;
 
-
-        //_humanoidLeft.transform.localRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
-        //modelRootLeft.transform.FindChild("hips/spine/chest/clavicle.L/upper_arm.L").transform.localRotation = new Quaternion(20, -180, 140, 0);
-        //modelRootLeft.transform.FindChild("hips/spine/chest/clavicle.R/upper_arm.R").transform.localRotation = new Quaternion(-20, -180, 140, 0);
+        _humanoidRight.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = Quaternion.Euler(-95, 122, 30);
+        //modelRootLeft.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/RightShoulder").transform.localRotation = new Quaternion(-20, -180, 140, 0);
         //modelRootRight.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(20, -180.0f, 140.0f, 0.0f);
         //modelRootRight.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/RightShoulder").transform.localRotation = new Quaternion(-20, -180.0f, 140.0f, 0.0f);
 

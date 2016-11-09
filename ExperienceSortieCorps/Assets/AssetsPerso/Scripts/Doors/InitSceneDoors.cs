@@ -55,6 +55,7 @@ public class InitSceneDoors : MonoBehaviour
     // const value of the scene 
     private const float _maxHeight = 30;
     private const float _maxWidth = 50;
+    private const float _standardHeight = 15;
 
     // Value of initial doors scales
     private float _initialDistX;
@@ -215,16 +216,11 @@ public class InitSceneDoors : MonoBehaviour
     }
    
     private void initListDistance()
-    {
-        // Message reçu - doors.Equals(Utils.BOTTOM_DOORS) : 4_6_167_187_1_150_210 : NombreRepetitions_NombreLargeurPorte_LargeurMin_LargeurMax_BULLSHIIT
-        // Message reçu - doors.Equals(Utils.TOP_DOORS) : 3_8_162_182_1_150_210 : NombreRepetitions_NombreLargeurPorte_LargeurMin_LargeurMax_BULLSHIT
-        // Message reçu - _doorType = FilesConst.FULL_DOOR  : 2_4_160_180_15_150_210 : nombreRepetitions_NombreLargeur_LargeurMin_LargeurMax_NombreHauteur_HauteurMin_HauteurMax
-
-
+    {     
         string resSocket = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
         string[] parameters = resSocket.Split('_');
 
-        Debug.Log(resSocket);
+        //Debug.Log(resSocket);
 
         // Récupération des paramètres envoyé via la socket
         _nbRepeat = int.Parse(parameters[0]);
@@ -274,6 +270,10 @@ public class InitSceneDoors : MonoBehaviour
                     _listHeight.Add(value);
 
                 }
+            }
+            else
+            {
+                _listHeight.Add(_standardHeight);
             }
 
             // Egalisation des listes
