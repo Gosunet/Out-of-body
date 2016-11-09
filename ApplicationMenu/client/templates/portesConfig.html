@@ -41,10 +41,10 @@
         <div class="col-sm-3 col-sm-offset-0 col-xs-11 col-xs-offset-0 inline-block-config">
             <span class="instructions agencement">Nombre de répétitions</span>
             <input type="number" ng-pattern="/^[0-9]*$/" min="0" step="1" name="nbRepet" ng-model="nbRepet" class="number-input" />
+            <div class="instructions">Total : {{nbEssai}} tests</div>
             <span ng-show="formulaire.nbRepet.$error.pattern">Not a valid number</span>
         </div>
 
-        <div class="instructions">Total : {{nbEssai}} tests</div>
         <div class="warning-msg">{{informationsDonnees}}</div>
         <div class="row">
             <a class="btn btn-icon left btn_config" ng-click="previous()">

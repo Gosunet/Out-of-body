@@ -75,6 +75,8 @@ public class InitModel : MonoBehaviour
     /// </summary>
     void initAvatar()
     {
+
+        _goSrc.transform.localScale = new Vector3(8, 8, 8);
         GameObject modelRoot = _goSrc.transform.FindChild("python").gameObject;
 
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(-0.5f, 0.3f, 0.3f, 0.8f);

@@ -122,6 +122,9 @@ public class SelectModel : MonoBehaviour
     /// </summary>
     void initAvatar()
     {
+        _avatar.transform.localPosition = Vector3.zero;
+        _avatar.transform.localScale = new Vector3(8, 8, 8);
+
         GameObject modelRoot = _avatar.transform.FindChild("python").gameObject;
 
         modelRoot.transform.FindChild("Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder").transform.localRotation = new Quaternion(-0.5f, 0.3f, 0.3f, 0.8f);
