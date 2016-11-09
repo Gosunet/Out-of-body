@@ -137,19 +137,18 @@ public class InitSceneDoors : MonoBehaviour
     {
         string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
 
+
         if (doors.Equals(Utils.BOTTOM_DOORS))
         {
             _bottomDoors.SetActive(true);       
-            _topDoors.SetActive(false);
-            _fullDoors.SetActive(false);
+            _topWall.SetActive(false);
 
             _doorType = FilesConst.BOTTOM_DOOR;
         }
         else if (doors.Equals(Utils.TOP_DOORS))
         {
             _topDoors.SetActive(true);
-            _bottomDoors.SetActive(false);
-            _fullDoors.SetActive(false);
+            _topWall.SetActive(false);
 
             _doorType = FilesConst.TOP_DOOR;
         }
@@ -157,8 +156,7 @@ public class InitSceneDoors : MonoBehaviour
         {
             _fullDoors.SetActive(true);
             _topWall.SetActive(true);
-            _bottomDoors.SetActive(false);
-            _topDoors.SetActive(false);
+
             _doorType = FilesConst.FULL_DOOR;
         }
 

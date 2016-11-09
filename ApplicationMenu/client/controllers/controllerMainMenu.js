@@ -4,6 +4,7 @@ menu.controller('mainMenuCtrl', function ($scope, $state, $rootScope, $http) {
     $rootScope.chemin1 = '';
     $rootScope.chemin2 = '';
     $rootScope.chemin3 = '';
+    $rootScope.chemin4 = '';
     $rootScope.suivant = true;
 
     // Exit function when button "quit app" clicked : send "/exit" to server to close all programs
