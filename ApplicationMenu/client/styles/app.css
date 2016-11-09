@@ -27,6 +27,7 @@
 }
 .title{
     font-family: "Roboto", Roboto, sans-serif;
+    color: white;
 }
 .bandeau{
 	background-color: #ededef;
@@ -46,7 +47,8 @@
 }
 
 .md-grid-list {
-  margin: 8px; }
+  margin: 8px;
+}
 
 .gray {
   background: #f5f5f5; }

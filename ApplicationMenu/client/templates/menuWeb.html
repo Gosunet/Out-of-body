@@ -41,8 +41,9 @@
 
 </head>
 <body ng-controller='menuWebCtrl' ng-cloak>
-    <header class="bandeau">
-        <h1 class="title col-sm-12 col-xs-12">Menu Principal</h1>
+    <md-toolbar class="md-hue-2">
+       
+        <h1 class="md-display-2 title">Out of Body</h1>
         <!-- Breadcrumb -->
         <div class="all-breadcrumb btn-group btn-breadcrumb">
             <a ui-sref="mainMenu" class="btn btn-default" ng-if="suivant;">{{chemin}}</a>
@@ -55,8 +56,7 @@
 
             <a href="" class="btn btn-default" ng-if="chemin3">{{chemin3}}</a>
         </div>
-    </header>
-
+    </md-toolbar>
     <!-- 	ui-view ask for a child state of menuWeb (defined in controllerMenuWeb) and go directly in MainMenu (because url="") -->
     <div ui-view></div>
 </body>
