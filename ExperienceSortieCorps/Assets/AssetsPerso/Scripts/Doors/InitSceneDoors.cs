@@ -128,38 +128,37 @@ public class InitSceneDoors : MonoBehaviour
                 return null;
             }
         }
-
-    }
-
+    }  
 
     string SEPARATOR = "\t";
+
 
     void Start()
     {
         string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
-        //_topWall.SetActive(false);
 
         if (doors.Equals(Utils.BOTTOM_DOORS))
         {
             _bottomDoors.SetActive(true);       
-            _topWall.SetActive(false);
+            _topDoors.SetActive(false);
+            _fullDoors.SetActive(false);
 
             _doorType = FilesConst.BOTTOM_DOOR;
         }
         else if (doors.Equals(Utils.TOP_DOORS))
         {
             _topDoors.SetActive(true);
-            _topWall.SetActive(false);
+            _bottomDoors.SetActive(false);
+            _fullDoors.SetActive(false);
 
             _doorType = FilesConst.TOP_DOOR;
         }
         else
         {
             _fullDoors.SetActive(true);
-            //_rightWall.SetActive(true);
-            //_leftWall.SetActive(true);
             _topWall.SetActive(true);
-
+            _bottomDoors.SetActive(false);
+            _topDoors.SetActive(false);
             _doorType = FilesConst.FULL_DOOR;
         }
 
@@ -325,30 +324,13 @@ public class InitSceneDoors : MonoBehaviour
         float newPosX = (float)(newDistance.width / 2.0);
         float newPosY = (float)(newDistance.height);
 
-        //if (_doorType == FilesConst.BOTTOM_DOOR)
-        //{
-        //    _cubeBottomLeft.transform.localPosition = new Vector3(-newPosX - 14, _cubeBottomLeft.transform.localPosition.y, _cubeBottomLeft.transform.localPosition.z);
-        //    _cubeBottomRight.transform.localPosition = new Vector3(newPosX + 14, _cubeBottomRight.transform.localPosition.y, _cubeBottomRight.transform.localPosition.z);
-        //}
-        //else if (_doorType == FilesConst.TOP_DOOR)
-        //{ 
-        //    // _____________ ENTOURLOUPE _________________ Le 14 sauvage !! Mais ça marche.
-        //    _cubeTopLeft.transform.localPosition = new Vector3(-newPosX - 14, _cubeTopLeft.transform.localPosition.y, _cubeTopLeft.transform.localPosition.z);
-        //    _cubeTopRight.transform.localPosition = new Vector3(newPosX + 14, _cubeTopRight.transform.localPosition.y, _cubeTopRight.transform.localPosition.z);
-        //}
-        //else
-        //{
-        //     // Positionnement des murs
-        //    _leftWall.transform.localPosition = new Vector3(-newPosX, _leftWall.transform.localPosition.y, _leftWall.transform.localPosition.z);
-        //    _rightWall.transform.localPosition = new Vector3(newPosX, _rightWall.transform.localPosition.y, _rightWall.transform.localPosition.z);
-        //    _topWall.transform.localPosition = new Vector3(_topWall.transform.localPosition.x, newPosY, _topWall.transform.localPosition.z);
-        //    Debug.Log("Nouvelle position Y : " + newPosY.ToString());
-        //}
-
-
         if (_doorType == FilesConst.FULL_DOOR)
         {
             _topWall.transform.localPosition = new Vector3(_topWall.transform.localPosition.x, newPosY, _topWall.transform.localPosition.z);
+            
+            // Gestion des bordures des portes
+            //LeftBordure.transform.localPosition = new Vector3(LeftBordure.transform.localPosition.x, 0, LeftBordure.transform.localPosition.z);
+           // RightBordure.transform.localPosition = new Vector3(RightBordure.transform.localPosition.x, 0S, RightBordure.transform.localPosition.z);
         }
         RightWall.transform.localPosition = new Vector3(newPosX + initialOffset, RightWall.transform.localPosition.y, RightWall.transform.localPosition.z);
         LeftWall.transform.localPosition = new Vector3(-newPosX - initialOffset, LeftWall.transform.localPosition.y, LeftWall.transform.localPosition.z);
@@ -364,6 +346,7 @@ public class InitSceneDoors : MonoBehaviour
         _listResultDistance.Add(new Measure(newPosX, newPosY, 0));
     }
 
+    #region Gestion des fichiers de resultats
     /// <summary>
     /// Loads the XML from assest.
     /// </summary>
@@ -632,6 +615,8 @@ public class InitSceneDoors : MonoBehaviour
             resultat[i] = (dst[i] - src[i]) / src[i] * 100;
         return resultat;
     }
+
+    #endregion
 
     #region Definition des classes
     public class Measure
