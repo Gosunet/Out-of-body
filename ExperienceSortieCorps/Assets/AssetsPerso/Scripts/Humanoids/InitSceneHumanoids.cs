@@ -60,7 +60,7 @@ public class InitSceneHumanoids : MonoBehaviour
     private bool _next = false;
     private bool _stop = false;
     // results file.
-    private string _fileName;
+    //private string _fileName;
     private XmlDocument _xmlModel;
 
     private List<bool> _answers = new List<bool>();
@@ -113,7 +113,21 @@ public class InitSceneHumanoids : MonoBehaviour
 
         // Rotation des bras 
         _humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightShoulderExtra").transform.localRotation = Quaternion.Euler(-98.2f, -55f, 39.2f); 
-        _humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftShoulderExtra").transform.localRotation = Quaternion.Euler(-98, 55f, -39.2f); 
+        _humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftShoulderExtra").transform.localRotation = Quaternion.Euler(-98, 55f, -39.2f);
+
+
+
+        BoxCollider boxCollider = _humanoidLeft.AddComponent<BoxCollider>();
+        Vector3 size = boxCollider.bounds.size;
+
+        Debug.Log("Size 1 : " + size);
+
+        boxCollider = _humanoidRight.AddComponent<BoxCollider>();
+        size = boxCollider.bounds.size;
+
+        Debug.Log("Size  2 : " + size);
+
+
 
     }
 
