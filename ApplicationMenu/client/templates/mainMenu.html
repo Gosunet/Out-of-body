@@ -3,7 +3,37 @@
 
 <!--  ui-sref refers to a state defined in controllerMenuWeb (angular-ui-router librairy)
  -->
-<div ng-controller="mainMenuCtrl">
+<div ng-controller="mainMenuCtrl" ng-cloak>
+   <!--
+    <md-grid-list
+        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile class="green">
+      <md-grid-tile-footer>
+        <h3>Choix de l'avatar</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+
+    <md-grid-tile class="yellow">
+      <md-grid-tile-footer>
+        <h3>Sortie de corps</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+
+    <md-grid-tile class="blue">
+      <md-grid-tile-footer>
+        <h3>Exercice des portes</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+
+    <md-grid-tile class="red">
+      <md-grid-tile-footer>
+        <h3>Exercice des humanoïdes</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+    -->
 
     <div class="btn_row row-centered">
         <input type="button" value="Choix de l'avatar" ui-sref="avatar" class="btn btn_config col-sm-4 col-sm-offset-1 col-xs-4 btn_home"></input>

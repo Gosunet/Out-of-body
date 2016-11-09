@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<!-- choose which the configuration you want for the humanoides' exercice
+ -->
+<div  ng-controller="HumanoideCtrl">
+<div class="btn_row row-centered">
+		<input type="button" ng-click='suivant_click("humanoides")' value="Humanoïdes" 
+			class="btn btn_config col-sm-4 col-sm-offset-1 col-xs-4 btn_home"/>
+
+		<input type="button" ng-click='suivant_click("batons")' value="Batons" 
+			class="btn btn_config col-sm-4 col-sm-offset-1 col-xs-4 btn_home"/>
+	</div>
+	<div class="row">
+		<a ng-click="previous()" class="btn btn_config btn-icon">
+			<i class="fa fa-chevron-left fa-lg"></i> Retour
+		</a>
+	</div>
+</div>
