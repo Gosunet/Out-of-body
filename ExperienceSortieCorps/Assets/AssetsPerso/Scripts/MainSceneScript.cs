@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class MainSceneScript : MonoBehaviour
 {
 
@@ -67,6 +68,8 @@ public class MainSceneScript : MonoBehaviour
                 break;
         }
     }
+
+
 
 
 }

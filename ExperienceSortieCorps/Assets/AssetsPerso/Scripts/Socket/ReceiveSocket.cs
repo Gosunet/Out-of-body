@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 /// <summary>
 /// Script used to treat the messages coming from the socket to do actions in Unity's scenes
@@ -15,6 +16,7 @@ public class ReceiveSocket : MonoBehaviour
     void Start()
     {
         _socketClient = SocketClient.GetInstance();
+        createLogDirectory();
     }
 
     void Update()
@@ -140,6 +142,36 @@ public class ReceiveSocket : MonoBehaviour
         }
     }
 
+
+    //Créer le repertoire du participant où tous les fichiers de log seront crées
+    void createLogDirectory()
+    {
+        Debug.Log("Dans createLogDirectory");
+        if (PlayerPrefs.GetInt(Utils.PREFS_START_EXPERIMENT) == 0)
+        {
+
+            if (!Directory.Exists(FilesConst.SAVE_FILES_DIRECTORY))
+            {
+                Directory.CreateDirectory(FilesConst.SAVE_FILES_DIRECTORY);
+            }
+
+            int dirIndex = 0;
+            foreach (string directory in Directory.GetDirectories(FilesConst.SAVE_FILES_DIRECTORY))
+            {
+                string dir = directory.Remove(0, FilesConst.SAVE_FILES_DIRECTORY.Length + 1);
+                if (dir.Contains(FilesConst.USER_PREFIX_DIRECTORY) && int.Parse(dir.Remove(0, FilesConst.USER_PREFIX_DIRECTORY.Length).Split('_')[0]) > dirIndex)
+                    dirIndex = int.Parse(dir.Remove(0, FilesConst.USER_PREFIX_DIRECTORY.Length).Split('_')[0]);
+            }
+            string time = System.DateTime.Now.ToString().Replace("/", "-").Replace(":", "-");
+            PlayerPrefs.SetString(Utils.PREFS_EXPERIMENT_PATH_FOLDER, Directory.CreateDirectory(FilesConst.SAVE_FILES_DIRECTORY + "/" + FilesConst.USER_PREFIX_DIRECTORY + (dirIndex + 1).ToString() + "_" + time).FullName);
+
+            PlayerPrefs.SetInt(Utils.PREFS_START_EXPERIMENT, 1);
+            PlayerPrefs.SetInt(Utils.PREFS_NUMERO_EXERCICE, 1);
+
+        }
+    }
+
+
     /// <summary>
     /// Method called before the application finishes
     /// </summary>
@@ -150,5 +182,8 @@ public class ReceiveSocket : MonoBehaviour
         _socketClient.StopAllProcess();
         PlayerPrefs.DeleteKey(Utils.PREFS_MODEL);
         PlayerPrefs.DeleteKey(Utils.PREFS_PATH_FOLDER);
+        PlayerPrefs.DeleteKey(Utils.PREFS_EXPERIMENT_PATH_FOLDER);
+        PlayerPrefs.DeleteKey(Utils.PREFS_START_EXPERIMENT);
+        PlayerPrefs.DeleteKey(Utils.PREFS_NUMERO_EXERCICE);
     }
 }

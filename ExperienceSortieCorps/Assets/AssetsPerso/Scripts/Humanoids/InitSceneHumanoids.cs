@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Xml;
 using System.IO;
+using ManageLog;
 
 public class InitSceneHumanoids : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class InitSceneHumanoids : MonoBehaviour
 
     private List<float> _listRangeDistance = new List<float>();
     private List<float> _listRandomDistance = new List<float>();
+    private List<double> _listTime = new List<double>();
 
     private float _distanceMinimal;
     private float _distanceMaximal;
@@ -185,15 +187,20 @@ public class InitSceneHumanoids : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.O) || Input.GetMouseButtonDown(0))
             {
+                Reponse(true);
                 _next = true;
             }
             else if (Input.GetKeyDown(KeyCode.N) || Input.GetMouseButtonDown(1))
             {
+                Reponse(false);
                 _next = true;
             }
 
             if (_next)
             {
+                //ajout du temps de reponse
+                _listTime[_listTime.Count - 1] = (System.DateTime.Now - _time).TotalMilliseconds;
+
                 if (_listRangeDistance.Count > 0)
                 {
                     applyScaleDistance();
@@ -202,6 +209,19 @@ public class InitSceneHumanoids : MonoBehaviour
                 else
                 {
                     _stop = true;
+
+                    string directory = PlayerPrefs.GetString(Utils.PREFS_PATH_FOLDER);
+                    if (!string.Empty.Equals(directory))
+                    {
+                        string username = directory.Remove(0, directory.LastIndexOf('\\') + 1).Split('_')[0];
+
+                        int numeroEx = recupNumeroExecice();
+                        FileLog fl = new FileLog();
+                        fl.createConfigFile(numeroEx);
+                        fl.createResultFileHumanoide(directory, username, numeroEx, _listRangeDistance, _listTime, _answers);
+
+                    }
+
                     SocketClient.GetInstance().Write(Utils.SOCKET_END_DOOR);  // Send message "end of exercice" to the server
                     Utils.CurrentState = State.WAITING;
                 }
@@ -209,6 +229,20 @@ public class InitSceneHumanoids : MonoBehaviour
         }
 
 
+    }
+
+
+    void Reponse(bool rep)
+    {
+        _answers.Add(rep);
+        _next = true;
+    }
+
+    int recupNumeroExecice()
+    {
+        int n = PlayerPrefs.GetInt(Utils.PREFS_NUMERO_EXERCICE);
+        PlayerPrefs.SetInt(Utils.PREFS_NUMERO_EXERCICE, n + 1);
+        return n;
     }
 
     /*
