@@ -14,6 +14,7 @@ var clients_unity = [];
 
 // boolean used to scene doors
 var door_finish = false;
+var humanoid_finish = false;
 
 // if user request for home page.
 app.get('/', function (req, res) {
@@ -45,7 +46,7 @@ var server = net.createServer(function (socket) {
             door_finish = true;
         }
         if (data.toString() === "humanoid_finish") {
-            door_finish = true;
+            humanoid_finish = true;
         }
     });
 

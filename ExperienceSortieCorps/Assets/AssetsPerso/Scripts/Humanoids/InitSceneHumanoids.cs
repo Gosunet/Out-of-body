@@ -202,7 +202,7 @@ public class InitSceneHumanoids : MonoBehaviour
                 else
                 {
                     _stop = true;
-                    SocketClient.GetInstance().Write(Utils.SOCKET_END_DOOR);  // Send message "end of exercice" to the server
+					SocketClient.GetInstance().Write(Utils.SOCKET_END_HUMANOID);  // Send message "end of exercice" to the server
                     Utils.CurrentState = State.WAITING;
                 }
             }

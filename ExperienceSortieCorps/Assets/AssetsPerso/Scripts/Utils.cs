@@ -70,6 +70,8 @@ public static class Utils
     public readonly static string SOCKET_VALIDATE = "validerAvatar";
 
     public readonly static string SOCKET_END_DOOR = "door_finish";
+	public readonly static string SOCKET_END_HUMANOID = "humanoid_finish";
+
 }
 
 public enum State
