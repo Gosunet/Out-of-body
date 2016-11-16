@@ -72,6 +72,8 @@ public class LoadScript : MonoBehaviour
     void EnableBaton()
     {
         _baton.SetActive(true);
+		_baton.transform.localScale = new Vector3 (8, 8, 8);
+
     }
 
     /// <summary>

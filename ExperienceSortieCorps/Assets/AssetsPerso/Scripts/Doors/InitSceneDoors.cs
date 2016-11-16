@@ -137,26 +137,22 @@ public class InitSceneDoors : MonoBehaviour
     {
         string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
 
+		_topWall.SetActive(false);
 
         if (doors.Equals(Utils.BOTTOM_DOORS))
         {
             _bottomDoors.SetActive(true);       
-            _topWall.SetActive(false);
-
             _doorType = FilesConst.BOTTOM_DOOR;
         }
         else if (doors.Equals(Utils.TOP_DOORS))
         {
             _topDoors.SetActive(true);
-            _topWall.SetActive(false);
-
             _doorType = FilesConst.TOP_DOOR;
         }
         else
         {
             _fullDoors.SetActive(true);
-            _topWall.SetActive(true);
-
+            _topWall.SetActive(true);		
             _doorType = FilesConst.FULL_DOOR;
         }
 
@@ -223,6 +219,9 @@ public class InitSceneDoors : MonoBehaviour
 
                         CallPythonScript(username, PlayerPrefs.GetInt(Utils.PREFS_CONDITION), Path.Combine(directory, username + ".txt"));
                     }
+					RightWall.SetActive(false);
+					LeftWall.SetActive(false);
+
                     SocketClient.GetInstance().Write(Utils.SOCKET_END_DOOR);  // Send message "doors end" to the server
 
                     Utils.CurrentState = State.WAITING;
