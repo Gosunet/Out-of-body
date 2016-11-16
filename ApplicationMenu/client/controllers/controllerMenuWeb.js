@@ -1,4 +1,4 @@
-var modules = ['ui.router', 'ngStorage'];
+var modules = ['ui.router', 'ngStorage', 'ngMaterial'];
 var menu = angular.module('menu', modules);
 
 menu.controller('menuWebCtrl', function ($scope, $state, $rootScope, $http) {
@@ -54,12 +54,20 @@ menu.config(function($stateProvider, $urlRouterProvider){
 	})
     // Humanoides part
     .state('humanoidesConfig', {
-        url : "/humanoidesConfig",
-        templateUrl: "client/templates/humanoidesConfig.html"
+        url : "/humanoides",
+        templateUrl: "client/templates/humanoides.html"
     })
     .state('runHumanoide', {
-        url : "/humanoidesConfig/en_cours",
+        url : "/humanoides/en_cours",
         templateUrl: "client/templates/runHumanoide.html"
+    })
+    .state('humanoides', {
+        url : "/humanoides/humanoides",
+        templateUrl: "client/templates/humanoidesConfig.html"
+    })
+    .state('batons', {
+        url : "/humanoides/batons",
+        templateUrl: "client/templates/humanoidesConfig.html"
     })
     
 });

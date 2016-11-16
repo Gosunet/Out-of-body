@@ -6,11 +6,14 @@ public static class Utils
 {
     public readonly static string PREFS_LAUNCH_MODEL = "launchModel";
     public readonly static string PREFS_AVATAR_GENDER = "avatarGender";
+    public readonly static string PREFS_START_EXPERIMENT = "start_experiment";
+    public readonly static string PREFS_NUMERO_EXERCICE = "numero_exercice";
 
     public readonly static string PREFS_GHOST = "ghost";
 
     public readonly static string PREFS_VALIDATE_AVATAR = SOCKET_VALIDATE;
     public readonly static string PREFS_PATH_FOLDER = "path_folder";
+    public readonly static string PREFS_EXPERIMENT_PATH_FOLDER = "paticipant_path_folder";
 
     public readonly static string PREFS_CONDITION = "Condition";
     public readonly static string PREFS_SESSION = "Session";
@@ -67,6 +70,8 @@ public static class Utils
     public readonly static string SOCKET_VALIDATE = "validerAvatar";
 
     public readonly static string SOCKET_END_DOOR = "door_finish";
+	public readonly static string SOCKET_END_HUMANOID = "humanoid_finish";
+
 }
 
 public enum State

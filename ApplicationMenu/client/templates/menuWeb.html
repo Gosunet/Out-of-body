@@ -15,6 +15,7 @@
     <script src="node_modules/ngStorage/ngStorage.min.js"></script>
     <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
     <!-- bootstrap -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8" />
@@ -31,11 +32,15 @@
 	<script src="client/controllers/controllerAvatar.js"></script>
 	<script src="client/controllers/controllerAvatarMedecin.js"></script> -->
     <script src="client/directives/directiveChrono.js"></script>
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="/node_modules/angular-aria/angular-aria.js"></script>
     <!-- our css files imports -->
     <link rel="stylesheet" type="text/css" href="build/build.min.css">
+    <!-- Angular Material requires Angular.js Libraries -->
 
 </head>
-<body ng-controller='menuWebCtrl'>
+<body ng-controller='menuWebCtrl' ng-cloak>
     <header class="bandeau">
         <h1 class="title col-sm-12 col-xs-12">Menu Principal</h1>
         <!-- Breadcrumb -->
