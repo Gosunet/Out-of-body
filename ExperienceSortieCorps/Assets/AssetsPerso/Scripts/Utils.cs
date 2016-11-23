@@ -12,7 +12,7 @@ public static class Utils
     public readonly static string PREFS_GHOST = "ghost";
 
     public readonly static string PREFS_VALIDATE_AVATAR = SOCKET_VALIDATE;
-    public readonly static string PREFS_PATH_FOLDER = "path_folder";
+    //public readonly static string PREFS_PATH_FOLDER = "path_folder";
     public readonly static string PREFS_EXPERIMENT_PATH_FOLDER = "paticipant_path_folder";
 
     public readonly static string PREFS_CONDITION = "Condition";

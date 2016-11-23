@@ -251,7 +251,7 @@ namespace ManageLog
                                 condition.ToString() + SEPARATOR +
                                 doorType.ToString() + SEPARATOR +
                                 distance[nbDoor].ToString() + SEPARATOR +
-                                distance[nbDoor].ToString() + SEPARATOR +
+                                "" + SEPARATOR +
                                 (answers[nbDoor] == true ? "1" : "0") + SEPARATOR +
                                 modelSrcvalue + SEPARATOR +
                                 modelDstvalue + SEPARATOR +

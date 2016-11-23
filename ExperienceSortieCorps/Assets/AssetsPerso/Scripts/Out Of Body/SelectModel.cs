@@ -218,26 +218,6 @@ public class SelectModel : MonoBehaviour
         }
     }
 
-   /* /// <summary>
-    /// Create the directory which will contains the user's files
-    /// </summary>
-    void CreateNewDirectory()
-    {
-        if (!Directory.Exists(FilesConst.SAVE_FILES_DIRECTORY))
-        {   // Si le répertoire contenant les résultats n'existent pas
-            Directory.CreateDirectory(FilesConst.SAVE_FILES_DIRECTORY); // On le crée
-        }
-        int dirIndex = 0;
-        foreach (string directory in Directory.GetDirectories(FilesConst.SAVE_FILES_DIRECTORY))
-        {
-            string dir = directory.Remove(0, FilesConst.SAVE_FILES_DIRECTORY.Length + 1);
-            if (dir.Contains(FilesConst.USER_PREFIX_DIRECTORY) && int.Parse(dir.Remove(0, FilesConst.USER_PREFIX_DIRECTORY.Length).Split('_')[0]) > dirIndex)
-                dirIndex = int.Parse(dir.Remove(0, FilesConst.USER_PREFIX_DIRECTORY.Length).Split('_')[0]);
-        }
-        string time = System.DateTime.Now.ToString().Replace("/", "-").Replace(":", "-");
-        PlayerPrefs.SetString(Utils.PREFS_PATH_FOLDER, Directory.CreateDirectory(FilesConst.SAVE_FILES_DIRECTORY + "/" + FilesConst.USER_PREFIX_DIRECTORY + (dirIndex + 1).ToString() + "_" + time).FullName);
-    }*/
-
     /// <summary>
     /// Selects the experimentator's avatar, taking care with the difference between the two models
     /// </summary>
