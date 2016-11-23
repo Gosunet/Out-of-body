@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using Valve.VR;
+using UnityEngine.VR;
 
 public class MainSceneScript : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class MainSceneScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("Initialisation de la scène principale");
         Debug.Log(Utils.CurrentState);
 
         // On désactive tout à l'initialisation
@@ -31,9 +31,9 @@ public class MainSceneScript : MonoBehaviour
         _CreatePicture.SetActive(false);
         _OutOfBody.SetActive(false);
         _HumanoidsExercice.SetActive(false);
-        
-        Debug.Log("Fin de l'initialisation");
-        Debug.Log(Utils.CurrentState);
+
+        // Gestion du type de casque virtuel
+
     }
 
     // Update is called once per frame
@@ -67,6 +67,16 @@ public class MainSceneScript : MonoBehaviour
 
                 break;
         }
+
+        // Activation de la VR
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            VRSettings.enabled = !VRSettings.enabled;
+            Debug.Log("Changed VRSettings.enabled to:" + VRSettings.enabled);
+        }
+
+         
+
     }
 
 
