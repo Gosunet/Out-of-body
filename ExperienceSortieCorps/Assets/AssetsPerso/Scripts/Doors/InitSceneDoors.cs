@@ -208,12 +208,10 @@ public class InitSceneDoors : MonoBehaviour
                     if (!string.Empty.Equals(directory))
                     {
                         string username = directory.Remove(0, directory.LastIndexOf('\\') + 1).Split('_')[0];
-                        Debug.Log("Avant création log - DOORS");
                         int numeroEx = recupNumeroExecice();
                         FileLog fl = new FileLog();
                         fl.createConfigFile(numeroEx);
                         fl.createResultFile(directory, username, numeroEx, _listResultDistance, _answers);
-                        Debug.Log("Apres création log - DOORS");
 
                         //CallPythonScript(username, PlayerPrefs.GetInt(Utils.PREFS_CONDITION), Path.Combine(directory, username + ".txt"));
                     }

@@ -27,6 +27,7 @@ public static class Utils
     public readonly static string FULL_DOORS = "fullDoors";
     public readonly static string BOTTOM_DOORS = "bottomDoors";
     public readonly static string TOP_DOORS = "topDoors";
+    public readonly static string HUMANOIDE_EXERCICE = "humanoideExercice";
 
     public readonly static string NO_PARAMETER = "noParameters";
     public readonly static string MORPHING_PARAMETER = "morphingParameter";

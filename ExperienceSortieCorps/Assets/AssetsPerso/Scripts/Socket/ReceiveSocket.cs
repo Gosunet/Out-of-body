@@ -130,6 +130,7 @@ public class ReceiveSocket : MonoBehaviour
             else if (message.Contains(Utils.SOCKET_HUMANOID))
             {
                 PlayerPrefs.SetString(Utils.PREFS_PARAM_HUMANOID, message.Split('/')[1]);
+                PlayerPrefs.SetString(Utils.PREFS_DOORS, Utils.HUMANOIDE_EXERCICE);
                 Utils.CurrentState = State.HUMANOID;
 
             }

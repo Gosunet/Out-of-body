@@ -273,13 +273,13 @@ namespace ManageLog
             string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
             int doorType;
 
+            Debug.Log("Dans createConfigFile :  door = " + doors);
+
             if (doors.Equals(Utils.BOTTOM_DOORS)) doorType = FilesConst.BOTTOM_DOOR;
             else if (doors.Equals(Utils.TOP_DOORS)) doorType = FilesConst.TOP_DOOR;
-            else if (doors.Equals(Utils.PREFS_PARAM_HUMANOID)) doorType = FilesConst.HUMANOIDE;
+            else if (doors.Equals(Utils.HUMANOIDE_EXERCICE)) doorType = FilesConst.HUMANOIDE;
             else doorType = FilesConst.FULL_DOOR;
 
-
-            //string[] parameters = config.Split('_');
             string nb_largeur;
             string min_largeur;
             string max_largeur;
@@ -289,8 +289,11 @@ namespace ManageLog
             string nb_repetition;
             string type;
 
-            if (doors.Equals(Utils.PREFS_PARAM_HUMANOID))
+            if (doors.Equals(Utils.HUMANOIDE_EXERCICE))
             {
+                Debug.Log("Ici -> Parametre exercice humanoide");
+                Debug.Log("config  = " + config);
+
                 string[] parameters = config.Split('_');
                 nb_largeur = parameters[1];
                 min_largeur = parameters[2];
@@ -300,6 +303,8 @@ namespace ManageLog
                 max_hauteur = "";
                 nb_repetition = parameters[0];
                 type = parameters[4];
+
+                Debug.Log("Parametre HU ou BA = " + parameters[4]);
             }
             else
             {

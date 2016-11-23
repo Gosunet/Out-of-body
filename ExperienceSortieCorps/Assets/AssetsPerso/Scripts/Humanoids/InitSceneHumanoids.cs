@@ -7,6 +7,7 @@ using System.Xml;
 using System.IO;
 using ManageLog;
 
+
 public class InitSceneHumanoids : MonoBehaviour
 {
 
@@ -31,7 +32,7 @@ public class InitSceneHumanoids : MonoBehaviour
 
     // Attribute to know the time response of the patient
     private System.DateTime _time;
-
+    
     // Management of the distance between the humanoids
     private int _nbTests = 0;
 
@@ -176,6 +177,7 @@ public class InitSceneHumanoids : MonoBehaviour
             _nbAnswers++;
 
             _text.GetComponent<Text>().text = _nbAnswers.ToString() + "/" + _nbTests.ToString();
+            _time = DateTime.Now;
         }
 
     }
@@ -199,7 +201,7 @@ public class InitSceneHumanoids : MonoBehaviour
             if (_next)
             {
                 //ajout du temps de reponse
-                _listTime[_listTime.Count - 1] = (System.DateTime.Now - _time).TotalMilliseconds;
+                _listTime.Add((DateTime.Now - _time).TotalMilliseconds);
 
                 if (_listRangeDistance.Count > 0)
                 {
@@ -209,6 +211,10 @@ public class InitSceneHumanoids : MonoBehaviour
                 else
                 {
                     _stop = true;
+
+                    Debug.Log("Fin exercice humanoide");
+                    Debug.Log("type door = " + PlayerPrefs.GetString(Utils.PREFS_DOORS));
+                    
 
                     string directory = PlayerPrefs.GetString(Utils.PREFS_EXPERIMENT_PATH_FOLDER);
                     if (!string.Empty.Equals(directory))
