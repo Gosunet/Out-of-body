@@ -12,6 +12,8 @@ public class InitSceneHumanoids : MonoBehaviour
     public GameObject _humanoidRight;
     public GameObject _humanoidLeft;
 
+    private float offset;
+
     // doors counter on the scene.
     [SerializeField]
     private GameObject _text;
@@ -107,7 +109,10 @@ public class InitSceneHumanoids : MonoBehaviour
 
         // Rotation des bras 
         _humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightShoulderExtra").transform.localRotation = Quaternion.Euler(-98.2f, -55f, 39.2f); 
-        _humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftShoulderExtra").transform.localRotation = Quaternion.Euler(-98, 55f, -39.2f); 
+        _humanoidLeft.transform.FindChild("python/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftShoulderExtra").transform.localRotation = Quaternion.Euler(-98, 55f, -39.2f);
+
+        // Offset entre le centre de l'humanoide et le pied pour la distance entre les 2 humanoides 
+        offset = _humanoidLeft.GetComponent<BoxCollider>().size.x*_humanoidLeft.transform.localScale.x/2;
 
     }
 
@@ -165,9 +170,10 @@ public class InitSceneHumanoids : MonoBehaviour
 
             float newPosX = (float)(_listRangeDistance[_distanceIndex] / 2.0);
 
+
             // Définition de la nouvelle position des humanoides 
-            _humanoidLeft.transform.localPosition = new Vector3(-newPosX, _humanoidLeft.transform.localPosition.y, _humanoidLeft.transform.localPosition.z);
-            _humanoidRight.transform.localPosition = new Vector3(newPosX, _humanoidLeft.transform.localPosition.y, _humanoidLeft.transform.localPosition.z);
+            _humanoidLeft.transform.localPosition = new Vector3(-newPosX + offset, _humanoidLeft.transform.localPosition.y, _humanoidLeft.transform.localPosition.z);
+            _humanoidRight.transform.localPosition = new Vector3(newPosX - offset, _humanoidLeft.transform.localPosition.y, _humanoidLeft.transform.localPosition.z);
 
             _listRangeDistance.RemoveAt(_distanceIndex);
             _nbDistance--;
