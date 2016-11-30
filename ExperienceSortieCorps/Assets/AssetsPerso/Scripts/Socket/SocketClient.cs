@@ -93,42 +93,6 @@ public class SocketClient
             Debug.Log("Reseau_OutOfBody - PAS OK");
         }
 
-        /*
-        System.Diagnostics.Process process = new System.Diagnostics.Process
-        {
-            StartInfo =
-            {
-                FileName = "netsh.exe",
-                Arguments = "wlan show hostednetwork",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true
-            }
-        };
-        process.Start();
-
-        string output = process.StandardOutput.ReadToEnd();
-
-        try
-        {
-            output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(l => l.Contains("Canal")).Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[1].TrimStart();
-        }
-        catch
-        {
-            new System.Diagnostics.Process
-            {
-                StartInfo =
-                {
-                    WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
-                    FileName = "cmd.exe",
-					//UserName = "administrator",
-                    
-					//Arguments = "/c netsh wlan set hostednetwork mode=allow ssid=\"Out Of Body\" key=outofbody && netsh wlan start hostednetwork"
-                }
-            }.Start();
-        }
-        */
-
 
         IPAddress ipAddress = IPAddress.Parse(Utils.SERVER_IP);
         _remoteEP = new IPEndPoint(ipAddress, Utils.SOCKET_PORT);
