@@ -40,6 +40,7 @@ public class InitSceneHumanoids : MonoBehaviour
     private int _randomDistance;
 
     private List<float> _listRangeDistance = new List<float>();
+    private List<float> _listRangeDistanceCopy = new List<float>();
     private List<float> _listRandomDistance = new List<float>();
     private List<double> _listTime = new List<double>();
 
@@ -154,9 +155,11 @@ public class InitSceneHumanoids : MonoBehaviour
             for (int i = 0; i < _nbRepetition; i++)
             {
                 _listRangeDistance.AddRange(listDistance);
+                _listRangeDistanceCopy.AddRange(listDistance);
             }
 
             _nbTests = _listRangeDistance.Count;
+            
         }
     }
 
@@ -224,7 +227,11 @@ public class InitSceneHumanoids : MonoBehaviour
                         int numeroEx = recupNumeroExecice();
                         FileLog fl = new FileLog();
                         fl.createConfigFile(numeroEx);
-                        fl.createResultFileHumanoide(directory, username, numeroEx, _listRangeDistance, _listTime, _answers);
+
+                        Debug.Log("listerangeDistance = " + _listRangeDistanceCopy);
+                        Debug.Log("listerangeDistance.Count = " + _listRangeDistanceCopy.Count);
+
+                        fl.createResultFileHumanoide(directory, username, numeroEx, _listRangeDistanceCopy, _listTime, _answers);
 
                     }
 

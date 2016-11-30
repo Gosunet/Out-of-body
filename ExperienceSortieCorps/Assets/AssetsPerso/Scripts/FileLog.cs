@@ -20,6 +20,18 @@ namespace ManageLog
         GameObject src;
         GameObject dst;
 
+        string nb_largeur;
+        string min_largeur;
+        string max_largeur;
+        string nb_hauteur;
+        string min_hauteur;
+        string max_hauteur;
+        string nb_repetition;
+        string type;
+        int doorType;
+
+
+
         public FileLog()
         {
             // Get name of the current model
@@ -228,6 +240,7 @@ namespace ManageLog
                                 "Corpulence docteur" + SEPARATOR + SEPARATOR + SEPARATOR +
                                 "Difference de corpulence" + SEPARATOR + SEPARATOR + SEPARATOR +
                                 "Temps de reponse");
+               
             }
             else
             {
@@ -240,10 +253,10 @@ namespace ManageLog
 
             if (doors.Equals(Utils.BOTTOM_DOORS)) doorType = FilesConst.BOTTOM_DOOR;
             else if (doors.Equals(Utils.TOP_DOORS)) doorType = FilesConst.TOP_DOOR;
-            else if (doors.Equals(Utils.PREFS_PARAM_HUMANOID)) doorType = FilesConst.HUMANOIDE;
+            else if (doors.Equals(Utils.HUMANOIDE_EXERCICE)) doorType = FilesConst.HUMANOIDE;
             else doorType = FilesConst.FULL_DOOR;
 
-
+            Debug.Log("distance = " + distance);
             for (int nbDoor = 0; nbDoor < distance.Count; nbDoor++)
             {
                 file.WriteLine(numEx + SEPARATOR +
@@ -268,56 +281,71 @@ namespace ManageLog
         public void createConfigFile(int numEx)
         {
             string filename = Path.Combine(PlayerPrefs.GetString(Utils.PREFS_EXPERIMENT_PATH_FOLDER), FilesConst.FILENAME_CONFIG_EXERCICE + ".txt");
-            string config = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
-
+            Debug.Log("filename = " + filename);
+            
             string doors = PlayerPrefs.GetString(Utils.PREFS_DOORS);
-            int doorType;
-
-            Debug.Log("Dans createConfigFile :  door = " + doors);
-
-            if (doors.Equals(Utils.BOTTOM_DOORS)) doorType = FilesConst.BOTTOM_DOOR;
-            else if (doors.Equals(Utils.TOP_DOORS)) doorType = FilesConst.TOP_DOOR;
-            else if (doors.Equals(Utils.HUMANOIDE_EXERCICE)) doorType = FilesConst.HUMANOIDE;
-            else doorType = FilesConst.FULL_DOOR;
-
-            string nb_largeur;
-            string min_largeur;
-            string max_largeur;
-            string nb_hauteur;
-            string min_hauteur;
-            string max_hauteur;
-            string nb_repetition;
-            string type;
-
+            
             if (doors.Equals(Utils.HUMANOIDE_EXERCICE))
             {
-                Debug.Log("Ici -> Parametre exercice humanoide");
-                Debug.Log("config  = " + config);
-
+                string config = PlayerPrefs.GetString(Utils.PREFS_PARAM_HUMANOID);
                 string[] parameters = config.Split('_');
                 nb_largeur = parameters[1];
                 min_largeur = parameters[2];
                 max_largeur = parameters[3];
                 nb_hauteur = "";
-                min_hauteur ="";
+                min_hauteur = "";
                 max_hauteur = "";
                 nb_repetition = parameters[0];
                 type = parameters[4];
-
-                Debug.Log("Parametre HU ou BA = " + parameters[4]);
+                doorType = FilesConst.HUMANOIDE;
+            }
+            else if (doors.Equals(Utils.BOTTOM_DOORS))
+            {
+                string config = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
+                string[] parameters = config.Split('_');
+                nb_largeur = parameters[1];
+                min_largeur = parameters[2];
+                max_largeur = parameters[3];
+                nb_hauteur = "";
+                min_hauteur = "";
+                max_hauteur = "";
+                nb_repetition = parameters[0];
+                type = "";
+                doorType = FilesConst.BOTTOM_DOOR;
+            }
+            else if(doors.Equals(Utils.TOP_DOORS))
+            {
+                string config = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
+                string[] parameters = config.Split('_');
+                nb_largeur = parameters[1];
+                min_largeur = parameters[2];
+                max_largeur = parameters[3];
+                nb_hauteur = "";
+                min_hauteur = "";
+                max_hauteur = "";
+                nb_repetition = parameters[0];
+                type = "";
+                doorType = FilesConst.TOP_DOOR;
+            }
+            else if(doors.Equals(Utils.FULL_DOORS))
+            {
+                string config = PlayerPrefs.GetString(Utils.PREFS_PARAM_DOORS);
+                string[] parameters = config.Split('_');
+                nb_largeur = parameters[1];
+                min_largeur = parameters[2];
+                max_largeur = parameters[3];
+                nb_hauteur = parameters[4];
+                min_hauteur = parameters[5];
+                max_hauteur = parameters[6];
+                nb_repetition = parameters[0];
+                type = "";
+                doorType = FilesConst.FULL_DOOR;
             }
             else
             {
-                string[] parameters = config.Split('_');
-                nb_largeur = parameters[1];
-                 min_largeur = parameters[2];
-                 max_largeur = parameters[3];
-                 nb_hauteur = parameters[4];
-                 min_hauteur = parameters[5];
-                 max_hauteur = parameters[6];
-                 nb_repetition = parameters[0];
-                type = "";
+                Debug.Log("ERREUR TYPE PORTE");
             }
+            
 
             StreamWriter file = null;
 

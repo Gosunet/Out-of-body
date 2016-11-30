@@ -48,6 +48,52 @@ public class SocketClient
     /// </summary>
     private SocketClient()
     {
+
+        System.Diagnostics.Process process = new System.Diagnostics.Process
+        {
+            StartInfo =
+            {
+                FileName = "netsh.exe",
+                Arguments = "wlan show network",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+        };
+        process.Start();
+
+        String output = process.StandardOutput.ReadToEnd();
+        Debug.Log("output = " + output);
+
+        if(output.Contains(FilesConst.NAME_WIFI_NETWORK) == true)
+        {
+            Debug.Log("Reseau_OutOfBody - OK");
+
+            System.Diagnostics.Process process_2 = new System.Diagnostics.Process
+            {
+                StartInfo =
+                {
+                    WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
+                    FileName = "cmd.exe",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    Arguments = "/c netsh wlan add profile filename=configProfilWifi.xml && netsh wlan connect name="+FilesConst.NAME_WIFI_NETWORK
+                }
+            };
+            process_2.Start();
+
+            string output_2 = process_2.StandardOutput.ReadToEnd();
+            Debug.Log("output_2 = " + output_2);
+            
+
+        }
+        else
+        {
+            Debug.Log("Reseau_OutOfBody - PAS OK");
+        }
+
+        /*
         System.Diagnostics.Process process = new System.Diagnostics.Process
         {
             StartInfo =
@@ -76,10 +122,13 @@ public class SocketClient
                     WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
                     FileName = "cmd.exe",
 					//UserName = "administrator",
-					Arguments = "/c netsh wlan set hostednetwork mode=allow ssid=\"Out Of Body\" key=outofbody && netsh wlan start hostednetwork"
+                    
+					//Arguments = "/c netsh wlan set hostednetwork mode=allow ssid=\"Out Of Body\" key=outofbody && netsh wlan start hostednetwork"
                 }
             }.Start();
         }
+        */
+
 
         IPAddress ipAddress = IPAddress.Parse(Utils.SERVER_IP);
         _remoteEP = new IPEndPoint(ipAddress, Utils.SOCKET_PORT);
