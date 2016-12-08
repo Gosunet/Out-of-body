@@ -12,7 +12,7 @@ public static class Utils
     public readonly static string PREFS_GHOST = "ghost";
 
     public readonly static string PREFS_VALIDATE_AVATAR = SOCKET_VALIDATE;
-    public readonly static string PREFS_PATH_FOLDER = "path_folder";
+    //public readonly static string PREFS_PATH_FOLDER = "path_folder";
     public readonly static string PREFS_EXPERIMENT_PATH_FOLDER = "paticipant_path_folder";
 
     public readonly static string PREFS_CONDITION = "Condition";
@@ -27,6 +27,7 @@ public static class Utils
     public readonly static string FULL_DOORS = "fullDoors";
     public readonly static string BOTTOM_DOORS = "bottomDoors";
     public readonly static string TOP_DOORS = "topDoors";
+    public readonly static string HUMANOIDE_EXERCICE = "humanoideExercice";
 
     public readonly static string NO_PARAMETER = "noParameters";
     public readonly static string MORPHING_PARAMETER = "morphingParameter";

@@ -48,38 +48,76 @@ public class SocketClient
     /// </summary>
     private SocketClient()
     {
-        System.Diagnostics.Process process = new System.Diagnostics.Process
+
+        //Recupère sur quel réseau on est connecté
+        System.Diagnostics.Process process_0 = new System.Diagnostics.Process
         {
             StartInfo =
             {
                 FileName = "netsh.exe",
-                Arguments = "wlan show hostednetwork",
+                Arguments = "wlan show interface",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 CreateNoWindow = true
             }
         };
-        process.Start();
+        process_0.Start();
+        String output_0 = process_0.StandardOutput.ReadToEnd();
 
-        string output = process.StandardOutput.ReadToEnd();
 
-        try
+        if (output_0.Contains(FilesConst.NAME_WIFI_NETWORK) == true)
         {
-            output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(l => l.Contains("Canal")).Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[1].TrimStart();
+            //Deja connecté au réseau out of body
+
         }
-        catch
+        else
         {
-            new System.Diagnostics.Process
+            //Pas encore connecté au réseau
+            //Vérifié si le réseau est actif
+            System.Diagnostics.Process process_1 = new System.Diagnostics.Process
             {
                 StartInfo =
+            {
+                FileName = "netsh.exe",
+                Arguments = "wlan show network",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+            };
+            process_1.Start();
+            String output_1 = process_1.StandardOutput.ReadToEnd();
+
+
+            //Si oui, se connecté dessus
+            if (output_1.Contains(FilesConst.NAME_WIFI_NETWORK) == true)
+            {
+                Debug.Log("Reseau_OutOfBody - OK");
+
+                System.Diagnostics.Process process_2 = new System.Diagnostics.Process
+                {
+                    StartInfo =
                 {
                     WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
                     FileName = "cmd.exe",
-					//UserName = "administrator",
-					Arguments = "/c netsh wlan set hostednetwork mode=allow ssid=\"Out Of Body\" key=outofbody && netsh wlan start hostednetwork"
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    Arguments = "/c netsh wlan add profile filename=configProfilWifi.xml && netsh wlan connect name="+FilesConst.NAME_WIFI_NETWORK
                 }
-            }.Start();
+                };
+                process_2.Start();
+
+                string output_2 = process_2.StandardOutput.ReadToEnd();
+
+            }
+
+            //pause pour laisser le temps à l'ordi de se connecter pour récuperer la bonne ip après
+            Thread.Sleep(5000);
         }
+
+
+
 
         IPAddress ipAddress = IPAddress.Parse(Utils.SERVER_IP);
         _remoteEP = new IPEndPoint(ipAddress, Utils.SOCKET_PORT);

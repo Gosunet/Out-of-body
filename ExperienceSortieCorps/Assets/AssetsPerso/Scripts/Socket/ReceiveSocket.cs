@@ -130,6 +130,7 @@ public class ReceiveSocket : MonoBehaviour
             else if (message.Contains(Utils.SOCKET_HUMANOID))
             {
                 PlayerPrefs.SetString(Utils.PREFS_PARAM_HUMANOID, message.Split('/')[1]);
+                PlayerPrefs.SetString(Utils.PREFS_DOORS, Utils.HUMANOIDE_EXERCICE);
                 Utils.CurrentState = State.HUMANOID;
 
             }
@@ -146,7 +147,6 @@ public class ReceiveSocket : MonoBehaviour
     //Créer le repertoire du participant où tous les fichiers de log seront crées
     void createLogDirectory()
     {
-        Debug.Log("Dans createLogDirectory");
         if (PlayerPrefs.GetInt(Utils.PREFS_START_EXPERIMENT) == 0)
         {
 
@@ -181,7 +181,7 @@ public class ReceiveSocket : MonoBehaviour
         _socketClient.socket.Close();       // Close the socket
         _socketClient.StopAllProcess();
         PlayerPrefs.DeleteKey(Utils.PREFS_MODEL);
-        PlayerPrefs.DeleteKey(Utils.PREFS_PATH_FOLDER);
+        //PlayerPrefs.DeleteKey(Utils.PREFS_PATH_FOLDER);
         PlayerPrefs.DeleteKey(Utils.PREFS_EXPERIMENT_PATH_FOLDER);
         PlayerPrefs.DeleteKey(Utils.PREFS_START_EXPERIMENT);
         PlayerPrefs.DeleteKey(Utils.PREFS_NUMERO_EXERCICE);
